@@ -1,0 +1,367 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Dependency Injection with Go</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="/img/favicon/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/img/favicon/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/img/favicon/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/img/favicon/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/img/favicon/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/img/favicon/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/img/favicon/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon-180x180.png">
+    <meta name="apple-mobile-web-app-title" content="Parse">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#5298fc">
+    <meta name="msapplication-TileImage" content="/img/favicon/apple-touch-icon-144x144.png">
+    <meta name="application-name" content="Parse">
+    <meta name="theme-color" content="#5298fc">
+    <!-- CSS -->
+    <!-- build:css -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/default.min.css">
+    <link href="/css/blog.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" rel="stylesheet" />
+    <!-- endbuild -->
+    <!--[if lte IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/classlist/2014.01.31/classList.min.js"></script>
+    <![endif]-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.2/anchor.js"></script>
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/ie7.css" />
+    <![endif]-->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/ie8.css" />
+    <![endif]-->
+    <!--[if lt IE 10]>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/ie89.css" />
+    <![endif]-->
+    <script>if(Function('/*@cc_on return document.documentMode===10@*/')()){document.documentElement.className+=' ie10';}</script>
+    <meta name="csrf-param" content="authenticity_token">
+    <meta name="csrf-token" content="KxDoKysxiXDIRV8VXwDYlQStDGzjbGZ24y6ZgQLYAsE=">
+    <meta name="description" content="The best place to stay up-to-date with the latest Parse news and events.
+">
+    <meta name="keywords" content="backend, mobile, development, server, code">
+    <meta property="fb:app_id" content="361736430535656">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Parse">
+    <meta property="og:image" content="http://blog.parseplatform.org//assets/images/social.jpg">
+    <meta property="og:description" content="The best place to stay up-to-date with the latest Parse news and events.
+">
+    <meta property="og:url" content="http://blog.parseplatform.org//learn/engineering/dependency-injection-with-go/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body class="pure p_docs p_docs_index  user_logged_in">
+<div class="site__wrapper">
+    <div class="site__content">
+        <div class="content__wrapper">
+            <header class="site__header site__header--white">
+    <div class="container">
+        <a href="/" class="header-logo">
+            <span class="hidden">Parse</span>
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            	 viewBox="0 0 152 60" style="enable-background:new 0 0 152 60;" xml:space="preserve">
+            <g>
+            	<path class="line one" d="M23.072,39.678c-0.011,3.348-2.395,4.615-4.909,4.615c-2.851,0-4.541-1.701-4.541-4.357
+            		c0-2.964,2.031-4.667,5.35-4.725h13.611c6.428,0.079,10.137-5.391,10.137-9.953c0-4.598-3.485-9.598-9.622-9.842
+            		c-6.083-0.242-9.99,5.281-9.99,11.167v3.863"/>
+            	<path class="line two" d="M23.072,39.678c-0.011,3.348-2.395,4.615-4.909,4.615c-2.851,0-4.541-1.701-4.541-4.357
+            		c0-2.964,2.031-4.667,5.35-4.725h13.611c6.428,0.079,10.137-5.391,10.137-9.953c0-4.598-3.485-9.598-9.622-9.842
+            		c-6.083-0.242-9.99,5.281-9.99,11.167v3.863"/>
+            	<path class="line three" d="M23.072,39.678c-0.011,3.348-2.395,4.615-4.909,4.615c-2.851,0-4.541-1.701-4.541-4.357
+            		c0-2.964,2.031-4.667,5.35-4.725h13.611c6.428,0.079,10.137-5.391,10.137-9.953c0-4.598-3.485-9.598-9.622-9.842
+            		c-6.083-0.242-9.99,5.281-9.99,11.167v3.863"/>
+            	<path class="st1" d="M151.88,31.106c0-4.561-2.575-7.835-7.173-7.872c-5.665-0.037-9.197,4.12-9.197,10.484v0.11
+            		c0,6.033,3.863,9.601,9.601,9.601c1.839,0,4.083-0.405,5.739-1.177v-3.568c-1.839,0.956-3.752,1.398-5.408,1.398
+            		c-3.568,0-6.07-1.803-6.18-5.959h12.36C151.807,33.056,151.88,32.026,151.88,31.106z M148.312,31.07h-8.829
+            		c0.625-3.053,2.354-4.745,4.966-4.745c2.575,0,3.863,1.729,3.863,4.561V31.07z"/>
+            	<path class="st1" d="M125.725,34.712l0.405,0.147c2.869,1.03,3.531,1.655,3.531,2.906c0,1.471-0.993,2.428-3.458,2.428
+            		c-1.986,0-4.12-0.662-6.364-1.692v3.752c1.803,0.699,4.12,1.177,6.364,1.177c4.819,0,7.21-2.428,7.21-5.812
+            		c0-2.943-1.471-4.525-5.408-5.959l-0.405-0.147c-3.127-1.14-3.752-1.655-3.752-2.869c0-1.361,0.956-2.281,3.237-2.281
+            		c1.839,0,3.642,0.589,5.408,1.435v-3.531c-1.582-0.625-3.348-1.03-5.26-1.03c-4.598,0-7.1,2.575-7.1,5.886
+            		C120.134,31.695,121.679,33.24,125.725,34.712"/>
+            	<path class="st1" d="M110.863,29.892c1.288-2.023,3.09-3.016,5.26-3.016c0.773,0,1.508,0.11,2.17,0.331v-3.384
+            		c-0.625-0.258-1.361-0.405-2.134-0.405c-2.281,0-4.01,1.03-5.518,3.09l-0.258-2.869h-3.164v19.386h3.642V29.892z"/>
+            	<path class="st1" d="M96.481,23.197c-2.281,0-4.672,0.699-6.474,1.692v3.605c2.023-1.251,4.378-2.023,6.254-2.023
+            		c2.612,0,3.679,1.14,3.679,3.274v1.619c-5.334,0.147-8.461,1.03-10.116,2.685c-1.177,1.14-1.692,2.685-1.692,4.267
+            		c0,3.274,2.354,5.15,5.702,5.15c2.244,0,4.378-0.92,6.327-2.796l0.221,2.354h3.164V30.003
+            		C103.544,25.405,101.263,23.197,96.481,23.197z M99.938,37.728c-1.471,1.619-3.2,2.722-5.297,2.722
+            		c-1.729,0-2.833-0.883-2.833-2.428c0-2.281,1.876-3.642,8.13-3.826V37.728z"/>
+            	<path class="st1" d="M77.609,17.643h-8.571v25.383h3.826v-8.314h4.745c5.923,0,9.491-3.164,9.491-8.498V26.14
+            		C87.1,20.806,83.532,17.643,77.609,17.643z M83.311,26.214c0,3.421-1.986,5.04-5.444,5.04h-5.003V21.101h5.04
+            		c3.421,0,5.408,1.619,5.408,5.04V26.214z"/>
+            	<path class="st1" d="M27.838,2.192C12.204,2.192-0.12,14.589-0.12,30.15c0,15.597,12.323,27.958,27.958,27.958
+            		c15.634,0,27.958-12.36,27.958-27.958C55.795,14.589,43.472,2.192,27.838,2.192z M32.473,36.955H18.752
+            		c-1.986,0-3.164,1.214-3.164,3.017c0,1.582,1.067,2.722,2.612,2.722c1.766,0,2.796-1.214,2.906-3.016h4.01
+            		c-0.184,4.341-2.906,6.658-6.953,6.658c-3.789,0-6.585-2.575-6.585-6.401c0-3.973,2.98-6.769,7.394-6.769h13.611
+            		c4.598,0,8.093-3.348,8.093-7.909c0-4.598-3.127-7.799-7.578-7.799c-4.414,0-7.946,3.237-7.946,9.123v3.863h-4.046v-3.863
+            		c0-7.872,5.076-12.986,12.066-12.986c6.695,0,11.551,4.782,11.551,11.588C44.723,32.026,39.499,36.955,32.473,36.955z"/>
+            </g>
+            </svg>
+        </a>
+        <a class="header-hamburger" data-menu-trigger="toggle">
+            <span class="header-hamburger__wrap">
+                <span class="header-hamburger__line--top"></span>
+                <span class="header-hamburger__line--middle"></span>
+                <span class="header-hamburger__line--bottom"></span>
+                <span class="header-hamburger__line--arrow-top"></span>
+                <span class="header-hamburger__line--arrow-bottom"></span>
+            </span>
+        </a>
+        <ul class="header-nav">
+            <li><a href="http://docs.parseplatform.org">Docs</a></li>
+            <li><a class="active" href="/">Blog</a></li>
+        </ul>
+	</div><!-- container -->
+</header>
+
+            <aside class="hero hero--docs-landing">
+    <div class="grid-container">
+        <div class="col--9">
+            <div class="hero--docs-landing__content">
+                
+                
+                <div>
+    <span class="author">Naitik Shah -</span>
+    <span class="date">
+        May
+        
+        13th,
+        
+        2014
+    </span>
+</div>
+
+                <h1 class="h1 h1--white">
+                    Dependency Injection with Go
+                </h1>
+            </div>
+        </div>
+    </div>
+</aside><!-- .hero -->
+<div class="container padding-top-40 padding-bottom-50" data-nav-waypoint>
+    <article role="article" class="posts">
+        
+        <div>
+    
+    <a href="/blog/categories/engineering" class="btn btn--dark--outline btn--xsmall category">Engineering</a>
+    
+    <a href="/blog/categories/ops" class="btn btn--dark--outline btn--xsmall category">Ops</a>
+    
+</div>
+
+        <div class="padding-bottom-20 padding-top-20">
+  
+  
+</div>
+        <div class="padding-bottom-40 post"><p>Dependency Injection (DI) is the pattern whereby the dependencies of a component are provided to it and made part of its state. The pattern is used to isolate components from the implementations of their dependencies. <a href="http://golang.org/" target="_blank">Go</a>, with its interfaces, eliminates many of the reasons for a classic DI system (in Java, etc). Our <a href="https://github.com/facebookgo/inject">inject</a> package provides very little of what you’ll find in a system like <a href="https://github.com/square/dagger">Dagger</a> or <a href="https://code.google.com/p/google-guice/">Guice,</a> and focuses on eliminating the need to manually allocate instances and wire up the object graph. This is both because many of those aspects are unnecessary, and also because we wanted to make injection simpler to understand in our Go codebase.</p>
+
+<p>Our path to building <a href="https://github.com/facebookgo/inject">inject</a> went through a few stages:</p>
+
+<h2 id="globals">Globals</h2>
+
+<p>It started with a unanimous, noble goal. We had global connection objects for services like Mongo, Memcache, and some others. Roughly, our code looked like this:</p>
+
+<pre class="brush: c; gutter: false">var MongoService mongo.Service
+
+func InitMongoService(url string) {
+  MongoService = ...
+}
+
+func GetApp(id uint64) *App {
+  a := new(App)
+  MongoService.Session().Find(..).One(a)
+  return a
+}</pre>
+
+<p>Typically the <code class="highlighter-rouge">main()</code> function would call the various init functions like <code class="highlighter-rouge">InitMongoService</code> with configuration based on flags/configuration files. At this point, functions like <code class="highlighter-rouge">GetApp</code> could use the service/connection. Of course we sometimes ran into cases where we forgot to initialize the global and so got into a <code class="highlighter-rouge">nil</code> pointer panic.</p>
+
+<p>Though in production the globals were shared resources, having them had (at least) two downsides. First, code was harder to ponder because the dependencies of a component were unclear. Second, testing these components was made more difficult, and running tests in parallel was near impossible. While our tests are relatively quick, we wanted to ensure they stay that way, and being able to run them in parallel was an important step in that direction. With global connections, tests that hit the same data in a backend service could not be run in parallel.</p>
+
+<h2 id="eliminating-globals">Eliminating Globals</h2>
+
+<p>To eliminate globals, we started with a common pattern. Our components now explicitly depended on say, a Mongo service, or a Memcache service. Roughly, our naive example above now looked something like this:</p>
+
+<pre class="brush: c; gutter: false">type AppLoader struct {
+  MongoService mongo.Service
+}
+
+func (l *AppLoader) Get(id uint64) *App {
+  a := new(App)
+  l.MongoService.Session().Find(..).One(a)
+  return a
+}</pre>
+
+<p>Many functions referencing globals now became methods on a struct containing its dependencies.</p>
+
+<h2 id="new-problems">New Problems</h2>
+
+<p>The globals and functions went away, and instead we got a bunch of new structs that were created in <code class="highlighter-rouge">main()</code> and passed around. This was great, and it solved the problems we described. But… we had a very verbose looking <code class="highlighter-rouge">main()</code> now. It started looking like this:</p>
+
+<pre class="brush: c; gutter: false">func main() {
+  mongoURL := flag.String(...)
+  mongoService := mongo.NewService(mongoURL)
+  cacheService := cache.NewService(...)
+  appLoader := &amp;AppLoader{
+    MongoService: mongoService,
+  }
+  handlerOne := &amp;HandlerOne{
+    AppLoader: appLoader,
+  }
+  handlerTwo := &amp;HandlerTwo{
+    AppLoader:    appLoader,
+    CacheService: cacheService,
+  }
+  rootHandler := &amp;RootHandler{
+    HandlerOne: handlerOne,
+    HandlerTwo: handlerTwo,
+  }
+  ...
+}</pre>
+
+<p>As we kept going down this path, our <code class="highlighter-rouge">main()</code> was dominated by a large number of struct literals which did two mundane things: allocating memory, and wiring up the object graph. We have several binaries that share libraries, so often we’d write this boring code more than once. A noticeable problem that kept occurring was that of <code class="highlighter-rouge">nil</code> pointer panics. We’d forget to pass the <code class="highlighter-rouge">CacheService</code> to <code class="highlighter-rouge">HandlerTwo</code> for example, and get a runtime panic. We tried constructor functions, but they started getting a bit out of hand, too, and still required a whole lot of manual nil checking as well as being verbose themselves. Our team was getting annoyed at having to set up the graph manually and making sure it worked correctly. Our tests set up their own object graph since they obviously didn’t share code with <code class="highlighter-rouge">main()</code>, so problems in there were often not caught in tests. Tests also started to get pretty verbose. In short, we had traded one set of problems for another.</p>
+
+<h2 id="identifying-the-mundane">Identifying the Mundane</h2>
+
+<p>Several of us had experience with Dependency Injection systems, and none of us would describe it as an experience of pure joy. So, when we first started discussing solving the new problem in terms of a DI system, there was a fair amount of push back.</p>
+
+<p>We decided that, while we needed something along those lines, we needed to ensure that we avoid known complexities and made some ground rules:</p>
+
+<ol class="standard-list">
+  <li>
+    No code generation. Our development build step was just <code>go install</code>. We did not want to lose that and introduce additional steps. Related to this rule was no file scanning. We didn't want a system that was O(number of files) and wanted to guard against an increase in build times.
+  </li>
+  <li>
+    No subgraphs. The notion of "subgraphs" was discussed to allow for injection to happen on a per-request basis. In short, a subgraph would be necessary to cleanly separate out objects with a "global" lifetime and objects with a "per-request" lifetime, and ensure we wouldn't mix the per-request objects across requests. We decided to just allow injection for "global" lifetime objects because that was our immediate problem.
+  </li>
+  <li>
+    Avoid code execution. DI by nature makes code difficult to follow. We wanted to avoid custom code execution/hooks to make it easier to reason about.
+  </li>
+</ol>
+
+<p>Based on those rules, our goals became somewhat clear:</p>
+
+<ol class="standard-list">
+  <li>
+    Inject should allocate objects.
+  </li>
+  <li>
+    Inject should wire up the object graph.
+  </li>
+  <li>
+    Inject should run only once on application startup.
+  </li>
+</ol>
+
+<p>We’ve discussed supporting constructor functions, but have avoided adding support for them so far.</p>
+
+<h2 id="inject">Inject</h2>
+
+<p>The inject library is the result of this work and our solution. It uses struct tags to enable injection, allocates memory for concrete types, and supports injection for interface types as long as they’re unambiguous. It also has some less often used features like named injection. Roughly, our naive example above now looks something like this:</p>
+
+<pre class="brush: c; gutter: false">type AppLoader struct {
+  MongoService mongo.Service `inject:""`
+}
+
+func (l *AppLoader) Get(id uint64) *App {
+  a := new(App)
+  l.MongoService.Session().Find(..).One(a)
+  return a
+}</pre>
+
+<p>Nothing has changed here besides the addition of the inject tag on the <code class="highlighter-rouge">MongoService</code> field. There are a few different ways to utilize that tag, but this is the most common use and simply indicates a shared <code class="highlighter-rouge">mongo.Service</code> instance is expected. Similarly imagine our <code class="highlighter-rouge">HandlerOne</code>, <code class="highlighter-rouge">HandlerTwo</code> &amp; <code class="highlighter-rouge">RootHandler</code> have inject tags on their fields.</p>
+
+<p>The fun part is that our <code class="highlighter-rouge">main()</code> now looks like this:</p>
+
+<pre class="brush: c; gutter: false">func main() {
+  mongoURL := flag.String(...)
+  mongoService := mongo.NewService(mongoURL)
+  cacheService := cache.NewService(...)
+  var app RootHandler
+  err := inject.Populate(mongoService, cacheService, &amp;app)
+  if err != nil {
+    panic(err)
+  }
+  ...
+}</pre>
+
+<p>Much shorter! Inject roughly goes through a process like this:</p>
+
+<ol class="standard-list">
+  <li>
+    Looks at each provided instance, eventually comes across the <code>app</code> instance of the <code>RootHandler</code> type.
+  </li>
+  <li>
+    Looks at the fields of <code>RootHandler</code>, and sees <code>*HandlerOne</code> with the <code>inject</code> tag. It doesn't find an existing instance for <code>*HandlerOne</code>, so it creates one, and assigns it to the field.
+  </li>
+  <li>
+    Goes through a similar process for the <code>HandlerOne</code> instance it just created. Finds the <code>AppLoader</code> field, similarly creates it.
+  </li>
+  <li>
+    For the <code>AppLoader</code> instance, which requires the <code>mongo.Service</code> instance, it finds that we seeded it with an instance when we called <code>Populate</code>. It assigns it here.
+  </li>
+  <li>
+    When it goes through the same process for <code>HandlerTwo</code>, it uses the <code>AppLoader</code> instance it created, so the two handlers share the instance.
+  </li>
+</ol>
+
+<p>Inject allocated the objects and wired up the graph for us. After that call to <code class="highlighter-rouge">Populate</code>, inject is no longer doing anything, and the rest of the application behaves the same as it did before.</p>
+
+<h2 id="the-win">The Win</h2>
+
+<p>We got our more manageable <code class="highlighter-rouge">main()</code> back. We now manually create instances for only two cases: if the instance needs configuration from main, or if it is required for an interface type. Even then, we typically create partial instances and let inject complete them for us. Test code also became considerably smaller, and providing test implementations no longer requires knowing the object graph. This made tests more resilient to changes far away. Refactoring also became easier as pulling out logic did not require manually tweaking the object graphs being created in various <code class="highlighter-rouge">main()</code> functions we have.</p>
+
+<p>Overall we’re quite happy with the results and how our codebase has evolved since the introduction of inject.</p>
+
+<h2 id="resources">Resources</h2>
+
+<p>You can find the source for the library on Github:</p>
+
+<p style="padding-left: 30px;">
+  <a href="https://github.com/facebookgo/inject">https://github.com/facebookgo/inject</a>
+</p>
+
+<p>We’ve also documented it, though playing with it is the best way to learn:</p>
+
+<p style="padding-left: 30px;">
+  <a href="https://godoc.org/github.com/facebookgo/inject">https://godoc.org/github.com/facebookgo/inject</a>
+</p>
+
+<p>We love to get contributions, too! Just make sure the tests pass:</p>
+
+<p style="padding-left: 30px;">
+  <a href="https://travis-ci.org/facebookgo/inject">https://travis-ci.org/facebookgo/inject</a>
+</p>
+</div>
+        <div class="copy-block margin-top-40 signature">
+            <div>
+                <span class="author">Naitik Shah</span>
+            </div>
+            <div class="margin-top-20">
+                
+                
+                
+            </div>
+        </div>
+    </article>
+</div>
+
+        </div><!-- /.content__wrapper -->
+    </div><!-- /.site__content -->
+</div><!-- /.site__wrapper -->
+</body>
+
+<script>
+    anchors.options = {
+      placement: 'left'
+    };
+    anchors.add();
+</script>
+</html>

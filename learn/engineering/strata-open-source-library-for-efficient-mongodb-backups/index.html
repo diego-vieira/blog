@@ -1,0 +1,326 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Strata: Open Source Library for Efficient MongoDB Backups</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="/img/favicon/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/img/favicon/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/img/favicon/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/img/favicon/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/img/favicon/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/img/favicon/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/img/favicon/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon-180x180.png">
+    <meta name="apple-mobile-web-app-title" content="Parse">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#5298fc">
+    <meta name="msapplication-TileImage" content="/img/favicon/apple-touch-icon-144x144.png">
+    <meta name="application-name" content="Parse">
+    <meta name="theme-color" content="#5298fc">
+    <!-- CSS -->
+    <!-- build:css -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/default.min.css">
+    <link href="/css/blog.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" rel="stylesheet" />
+    <!-- endbuild -->
+    <!--[if lte IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/classlist/2014.01.31/classList.min.js"></script>
+    <![endif]-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.2/anchor.js"></script>
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/ie7.css" />
+    <![endif]-->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/ie8.css" />
+    <![endif]-->
+    <!--[if lt IE 10]>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/ie89.css" />
+    <![endif]-->
+    <script>if(Function('/*@cc_on return document.documentMode===10@*/')()){document.documentElement.className+=' ie10';}</script>
+    <meta name="csrf-param" content="authenticity_token">
+    <meta name="csrf-token" content="KxDoKysxiXDIRV8VXwDYlQStDGzjbGZ24y6ZgQLYAsE=">
+    <meta name="description" content="The best place to stay up-to-date with the latest Parse news and events.
+">
+    <meta name="keywords" content="backend, mobile, development, server, code">
+    <meta property="fb:app_id" content="361736430535656">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Parse">
+    <meta property="og:image" content="http://blog.parseplatform.org//assets/images/social.jpg">
+    <meta property="og:description" content="The best place to stay up-to-date with the latest Parse news and events.
+">
+    <meta property="og:url" content="http://blog.parseplatform.org//learn/engineering/strata-open-source-library-for-efficient-mongodb-backups/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body class="pure p_docs p_docs_index  user_logged_in">
+<div class="site__wrapper">
+    <div class="site__content">
+        <div class="content__wrapper">
+            <header class="site__header site__header--white">
+    <div class="container">
+        <a href="/" class="header-logo">
+            <span class="hidden">Parse</span>
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            	 viewBox="0 0 152 60" style="enable-background:new 0 0 152 60;" xml:space="preserve">
+            <g>
+            	<path class="line one" d="M23.072,39.678c-0.011,3.348-2.395,4.615-4.909,4.615c-2.851,0-4.541-1.701-4.541-4.357
+            		c0-2.964,2.031-4.667,5.35-4.725h13.611c6.428,0.079,10.137-5.391,10.137-9.953c0-4.598-3.485-9.598-9.622-9.842
+            		c-6.083-0.242-9.99,5.281-9.99,11.167v3.863"/>
+            	<path class="line two" d="M23.072,39.678c-0.011,3.348-2.395,4.615-4.909,4.615c-2.851,0-4.541-1.701-4.541-4.357
+            		c0-2.964,2.031-4.667,5.35-4.725h13.611c6.428,0.079,10.137-5.391,10.137-9.953c0-4.598-3.485-9.598-9.622-9.842
+            		c-6.083-0.242-9.99,5.281-9.99,11.167v3.863"/>
+            	<path class="line three" d="M23.072,39.678c-0.011,3.348-2.395,4.615-4.909,4.615c-2.851,0-4.541-1.701-4.541-4.357
+            		c0-2.964,2.031-4.667,5.35-4.725h13.611c6.428,0.079,10.137-5.391,10.137-9.953c0-4.598-3.485-9.598-9.622-9.842
+            		c-6.083-0.242-9.99,5.281-9.99,11.167v3.863"/>
+            	<path class="st1" d="M151.88,31.106c0-4.561-2.575-7.835-7.173-7.872c-5.665-0.037-9.197,4.12-9.197,10.484v0.11
+            		c0,6.033,3.863,9.601,9.601,9.601c1.839,0,4.083-0.405,5.739-1.177v-3.568c-1.839,0.956-3.752,1.398-5.408,1.398
+            		c-3.568,0-6.07-1.803-6.18-5.959h12.36C151.807,33.056,151.88,32.026,151.88,31.106z M148.312,31.07h-8.829
+            		c0.625-3.053,2.354-4.745,4.966-4.745c2.575,0,3.863,1.729,3.863,4.561V31.07z"/>
+            	<path class="st1" d="M125.725,34.712l0.405,0.147c2.869,1.03,3.531,1.655,3.531,2.906c0,1.471-0.993,2.428-3.458,2.428
+            		c-1.986,0-4.12-0.662-6.364-1.692v3.752c1.803,0.699,4.12,1.177,6.364,1.177c4.819,0,7.21-2.428,7.21-5.812
+            		c0-2.943-1.471-4.525-5.408-5.959l-0.405-0.147c-3.127-1.14-3.752-1.655-3.752-2.869c0-1.361,0.956-2.281,3.237-2.281
+            		c1.839,0,3.642,0.589,5.408,1.435v-3.531c-1.582-0.625-3.348-1.03-5.26-1.03c-4.598,0-7.1,2.575-7.1,5.886
+            		C120.134,31.695,121.679,33.24,125.725,34.712"/>
+            	<path class="st1" d="M110.863,29.892c1.288-2.023,3.09-3.016,5.26-3.016c0.773,0,1.508,0.11,2.17,0.331v-3.384
+            		c-0.625-0.258-1.361-0.405-2.134-0.405c-2.281,0-4.01,1.03-5.518,3.09l-0.258-2.869h-3.164v19.386h3.642V29.892z"/>
+            	<path class="st1" d="M96.481,23.197c-2.281,0-4.672,0.699-6.474,1.692v3.605c2.023-1.251,4.378-2.023,6.254-2.023
+            		c2.612,0,3.679,1.14,3.679,3.274v1.619c-5.334,0.147-8.461,1.03-10.116,2.685c-1.177,1.14-1.692,2.685-1.692,4.267
+            		c0,3.274,2.354,5.15,5.702,5.15c2.244,0,4.378-0.92,6.327-2.796l0.221,2.354h3.164V30.003
+            		C103.544,25.405,101.263,23.197,96.481,23.197z M99.938,37.728c-1.471,1.619-3.2,2.722-5.297,2.722
+            		c-1.729,0-2.833-0.883-2.833-2.428c0-2.281,1.876-3.642,8.13-3.826V37.728z"/>
+            	<path class="st1" d="M77.609,17.643h-8.571v25.383h3.826v-8.314h4.745c5.923,0,9.491-3.164,9.491-8.498V26.14
+            		C87.1,20.806,83.532,17.643,77.609,17.643z M83.311,26.214c0,3.421-1.986,5.04-5.444,5.04h-5.003V21.101h5.04
+            		c3.421,0,5.408,1.619,5.408,5.04V26.214z"/>
+            	<path class="st1" d="M27.838,2.192C12.204,2.192-0.12,14.589-0.12,30.15c0,15.597,12.323,27.958,27.958,27.958
+            		c15.634,0,27.958-12.36,27.958-27.958C55.795,14.589,43.472,2.192,27.838,2.192z M32.473,36.955H18.752
+            		c-1.986,0-3.164,1.214-3.164,3.017c0,1.582,1.067,2.722,2.612,2.722c1.766,0,2.796-1.214,2.906-3.016h4.01
+            		c-0.184,4.341-2.906,6.658-6.953,6.658c-3.789,0-6.585-2.575-6.585-6.401c0-3.973,2.98-6.769,7.394-6.769h13.611
+            		c4.598,0,8.093-3.348,8.093-7.909c0-4.598-3.127-7.799-7.578-7.799c-4.414,0-7.946,3.237-7.946,9.123v3.863h-4.046v-3.863
+            		c0-7.872,5.076-12.986,12.066-12.986c6.695,0,11.551,4.782,11.551,11.588C44.723,32.026,39.499,36.955,32.473,36.955z"/>
+            </g>
+            </svg>
+        </a>
+        <a class="header-hamburger" data-menu-trigger="toggle">
+            <span class="header-hamburger__wrap">
+                <span class="header-hamburger__line--top"></span>
+                <span class="header-hamburger__line--middle"></span>
+                <span class="header-hamburger__line--bottom"></span>
+                <span class="header-hamburger__line--arrow-top"></span>
+                <span class="header-hamburger__line--arrow-bottom"></span>
+            </span>
+        </a>
+        <ul class="header-nav">
+            <li><a href="http://docs.parseplatform.org">Docs</a></li>
+            <li><a class="active" href="/">Blog</a></li>
+        </ul>
+	</div><!-- container -->
+</header>
+
+            <aside class="hero hero--docs-landing">
+    <div class="grid-container">
+        <div class="col--9">
+            <div class="hero--docs-landing__content">
+                
+                
+                <div>
+    <span class="author">Travis Redman -</span>
+    <span class="date">
+        September
+        
+        4th,
+        
+        2015
+    </span>
+</div>
+
+                <h1 class="h1 h1--white">
+                    Strata: Open Source Library for Efficient MongoDB Backups
+                </h1>
+            </div>
+        </div>
+    </div>
+</aside><!-- .hero -->
+<div class="container padding-top-40 padding-bottom-50" data-nav-waypoint>
+    <article role="article" class="posts">
+        
+        <div>
+    
+    <a href="/blog/categories/engineering" class="btn btn--dark--outline btn--xsmall category">Engineering</a>
+    
+    <a href="/blog/categories/ops" class="btn btn--dark--outline btn--xsmall category">Ops</a>
+    
+</div>
+
+        <div class="padding-bottom-20 padding-top-20">
+  
+  
+</div>
+        <div class="padding-bottom-40 post"><p>If you saw Charity’s <a href="http://blog.parse.com/announcements/mongodb-rocksdb-parse/">post</a> back in April, you’ll recall that Parse is using MongoDB built on RocksDB (“MongoRocks”) in our production MongoDB deployment. MongoRocks combines the MongoDB storage API and RocksDB storage engine to deliver faster writes and more efficient storage utilization compared with MMAP. At Parse we’ve seen write speed improvements of up to 50x and up to a 90% reduction in disk space. As we have hardened operations and tooling around MongoRocks deployments, we’ve found another great advantage: it can make doing full and incremental backups incredibly easy!</p>
+
+<hr />
+
+<h2 id="backups-on-mongo-with-mmapv1">Backups on Mongo with MMAPv1</h2>
+
+<p>Taking backups of our MongoDB replica sets has always been a source of pain at Parse. With a large amount of data (several TB per replica set), it’s not reasonable for us to use the mongodump command. It takes hours or days to generate a complete dump file, which must then be shipped off to remote storage. A lack of incremental support also means that we need to store duplicate data, and generate a full dump each time.</p>
+
+<p>Until now, our solution has been to use Amazon EBS snapshots. This has made the process relatively simple:</p>
+
+<ol class="standard-list">
+  <li>
+    Issue a db.fsyncLock() and fsync on the backup host
+  </li>
+  <li>
+    Trigger an EBS snapshot on all EBS volumes in the RAID
+  </li>
+  <li>
+    Store some metadata consisting of timestamp and the snapshot IDs involved in this backup
+  </li>
+  <li>
+    Issue a db.fsyncUnlock()
+  </li>
+</ol>
+
+<p>Triggering a snapshot this way takes a matter of seconds. Afterward, the heavy lifting occurs on Amazon’s side, which means there’s little to orchestrate on our end. After a base snapshot has been created (many hours), an incremental snapshot will usually complete in a matter of minutes. To restore, we simply pull the snapshots for the given timestamp we want.</p>
+
+<p>This has worked for us for a while, but has a few shortcomings:</p>
+
+<h3 id="dedicated-infrastructure">Dedicated Infrastructure</h3>
+
+<p>EBS snapshots put a lot of stress on the EBS volume while in progress, and the backup node frequently lags behind the replica set until the snapshot is complete. This means the node is unusable for query traffic during the backup window, and we have had to dedicate an entire node in each replica set just for backups. This is a lot of hardware to have just sitting around.</p>
+
+<h3 id="slow-restore-times">Slow Restore Times</h3>
+
+<p>Provisioning volumes from an EBS snapshot is fast, but to have production-ready volumes, they need to be warmed, and this can take up to 24H (with 1TB volumes). This delay is expensive and slows us down when we want to rapidly access restored data, such as in <a href="http://blog.parse.com/learn/engineering/mongodb-rocksdb-benchmark-setup-compression/">benchmarking</a> or in a potential DR scenario.</p>
+
+<h3 id="cost">Cost</h3>
+
+<p>To use EBS snapshots we have to pay for both the storage of tens of thousands of snapshots and the underlying EBS PIOPS volumes.</p>
+
+<h2 id="backups-with-lsm">Backups with LSM</h2>
+
+<p>RocksDB’s LSM (Log-structured Merge-tree) data format introduces possibilities for doing backups very efficiently. To understand this, let’s look at some key characteristics of LSM:</p>
+
+<ul class="standard-list">
+  <li>
+    LSM writes data first to its memtable. When this needs to be flushed to disk, it is written as an .sst file.
+  </li>
+  <li>
+    After an .sst file is written, it is immutable. It will never be modified again, but may be removed during a compaction operation
+  </li>
+  <li>
+    Compaction is run periodically to process updated and deleted keys, with older .sst files being removed and newer .sst files being created
+  </li>
+  <li>
+    A description of all .sst files is maintained in a MANIFEST file stored with the .sst files
+  </li>
+</ul>
+
+<p>Our approach to backups takes advantage of the immutable nature of .sst files. Here’s a simplified example.</p>
+
+<p>A working MongoRocks backup may look something like this:</p>
+
+<pre class="line-numbers"><code class="language-bash">- MANIFEST-000001
+- CURRENT
+- 0000.sst
+- 0001.sst</code></pre>
+
+<p>To restore this DB to its current state, we need a copy of all files. Let’s assume we’ve copied these files for a moment, and call it backup #1. Some time later, more writes occur and the directory now looks like this:</p>
+
+<pre class="line-numbers"><code class="language-bash">- MANIFEST-000002
+- CURRENT
+- 0000.sst
+- 0001.sst
+- 0002.sst</code></pre>
+
+<p>To make a backup (backup #2) of this state, we again need all of the files. However, since <strong>0000.sst</strong> and <strong>0001.sst</strong> were captured in the previous backup, we can skip them, since we know they haven’t changed.</p>
+
+<p>Some more time has passed, a compaction has run, and the directory now looks like this:</p>
+
+<pre class="line-numbers"><code class="language-bash">- MANIFEST-000003
+- CURRENT
+- 0002.sst
+- 0003.sst</code></pre>
+
+<p>Since we copied <strong>0002.sst</strong> in backup #2, we don’t need to copy it in backup #3. What about 0000.sst and 0001.sst? We still have copies of them in our remote storage. If we care about restoring from backup #1 or #2, we need to keep these copies around. Otherwise, they can be safely deleted. LSM allows backup operations to be very efficient since only new, compacted data is copied.</p>
+
+<p>In practice, production databases can have tens of thousands of .sst files, but the approach is still the same. After you have a base copy of your data, maintaining an up-to-date backup is simply a matter of recognizing and copying new files while pruning obsolete files.</p>
+
+<h2 id="backup-of-mongorocks">Backup of MongoRocks</h2>
+
+<p>Copying LSM files is straightforward, but how do you get a consistent copy of all of the LSM files on a live database? MongoRocks has a helpful command for getting a complete point-in-time snapshot of the database state.</p>
+
+<pre class="line-numbers"><code class="language-bash">db.adminCommand({setParameter:1, rocksdbBackup: "/path/to/backup/dir"})</code></pre>
+
+<p><span style="line-height: 1.5">When running this command, RocksDB flushes its memtables to .sst files, creates hard links to the current .sst files, and copies the MANIFEST and CURRENT files to the backup directory. This operation takes a matter of seconds, and afterward a backup agent can simply copy the contents of the backup directory to get a complete picture of the DB at the time the snapshot was taken. When done copying, just delete the backup directory!</span></p>
+
+<p>What do we gain from this approach?</p>
+
+<h3 id="faster-backup-and-restore-times">Faster Backup and Restore Times</h3>
+
+<p>Both backup and restore times are reduced when compared to EBS snapshots. While EBS requires a full block-level copy of the storage volume to build a base snapshot, backing up LSM files only requires transferring the existing file data. In practice, it takes significantly less time to copy this data than to copy all blocks on the volume.</p>
+
+<p>Similarly, restoring from backup means simply pulling files from remote storage, which is usually a lot less data and requires less time to do than pulling all blocks down from an EBS snapshot. On average it takes 2-3 hours to restore a complete replica set from S3, versus nearly 24 hours to pull all blocks down from an EBS snapshot. We also see more consistent incremental backup performance, with incremental MongoRocks backups taking an average of 5 minutes versus a range of 15-30 minutes with EBS.</p>
+
+<p><img class="alignnone size-full wp-image-3788" src="http://blog.parseplatform.org//assets/wp-content/uploads/2015/09/base_backup.png" alt="base_backup" width="346" height="279" srcset="http://blog.parseplatform.org//assets/wp-content/uploads/2015/09/base_backup.png 346w, http://blog.parseplatform.org//assets/wp-content/uploads/2015/09/base_backup-300x242.png 300w" sizes="(max-width: 346px) 100vw, 346px" /> <img class="alignnone size-full wp-image-3789" src="http://blog.parseplatform.org//assets/wp-content/uploads/2015/09/inc_backup.png" alt="inc_backup" width="346" height="269" srcset="http://blog.parseplatform.org//assets/wp-content/uploads/2015/09/inc_backup.png 346w, http://blog.parseplatform.org//assets/wp-content/uploads/2015/09/inc_backup-300x233.png 300w" sizes="(max-width: 346px) 100vw, 346px" /><img class="alignnone size-full wp-image-3790" src="http://blog.parseplatform.org//assets/wp-content/uploads/2015/09/restore_time.png" alt="restore_time" width="348" height="269" srcset="http://blog.parseplatform.org//assets/wp-content/uploads/2015/09/restore_time.png 348w, http://blog.parseplatform.org//assets/wp-content/uploads/2015/09/restore_time-300x232.png 300w" sizes="(max-width: 348px) 100vw, 348px" /></p>
+
+<p> </p>
+
+<h3 id="reduced-storage-costs">Reduced Storage Costs</h3>
+
+<p>Since only new .sst files are saved, we see significant storage savings by only paying for storage for data that has changed. Additionally, since we no longer need EBS snapshots, we can use faster local SSDs, and do not need to pay the additional cost for EBS PIOPS volumes.</p>
+
+<h3 id="less-infrastructure">Less Infrastructure</h3>
+
+<p>We no longer need a dedicated, hidden backup host, which means we can remove a replica from each replica set and reduce infrastructure cost and complexity.</p>
+
+<hr />
+
+<h2 id="introducing-strata">Introducing Strata</h2>
+
+<p>We’re so excited about this approach to backups that we are releasing <strong><a href="http://github.com/facebookgo/rocks-strata" target="_blank">rocks-strata</a></strong>, our Go-based library and command line toolset for performing, managing, and restoring MongoRocks-based backups. Some features include:</p>
+
+<ul class="standard-list">
+  <li>
+    Simple CLI tool to trigger backups on the local host, copy files and file metadata to remote storage, query metadata, and perform local restores
+  </li>
+  <li>
+    Amazon S3 remote storage implementation (can be replaced by an alternative storage system of your choice by implementing the Storage interface)
+  </li>
+  <li>
+    Query-able remote backups: you can query remote backups from a mongo shell without performing a full restore.
+  </li>
+</ul>
+
+<p>Special thanks to Facebook intern <a href="https://github.com/AGFeldman">Aaron Feldman</a> for building out this toolset over the past couple of months. If you are using or experimenting with MongoRocks, we encourage you to give it a try!</p>
+</div>
+        <div class="copy-block margin-top-40 signature">
+            <div>
+                <span class="author">Travis Redman</span>
+            </div>
+            <div class="margin-top-20">
+                
+                
+                
+            </div>
+        </div>
+    </article>
+</div>
+
+        </div><!-- /.content__wrapper -->
+    </div><!-- /.site__content -->
+</div><!-- /.site__wrapper -->
+</body>
+
+<script>
+    anchors.options = {
+      placement: 'left'
+    };
+    anchors.add();
+</script>
+</html>

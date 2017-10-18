@@ -1,0 +1,286 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>The Parse SDK: What’s inside?</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="/img/favicon/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/img/favicon/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/img/favicon/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/img/favicon/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/img/favicon/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/img/favicon/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/img/favicon/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon-180x180.png">
+    <meta name="apple-mobile-web-app-title" content="Parse">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#5298fc">
+    <meta name="msapplication-TileImage" content="/img/favicon/apple-touch-icon-144x144.png">
+    <meta name="application-name" content="Parse">
+    <meta name="theme-color" content="#5298fc">
+    <!-- CSS -->
+    <!-- build:css -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/default.min.css">
+    <link href="/css/blog.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" rel="stylesheet" />
+    <!-- endbuild -->
+    <!--[if lte IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/classlist/2014.01.31/classList.min.js"></script>
+    <![endif]-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.2/anchor.js"></script>
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/ie7.css" />
+    <![endif]-->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/ie8.css" />
+    <![endif]-->
+    <!--[if lt IE 10]>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/ie89.css" />
+    <![endif]-->
+    <script>if(Function('/*@cc_on return document.documentMode===10@*/')()){document.documentElement.className+=' ie10';}</script>
+    <meta name="csrf-param" content="authenticity_token">
+    <meta name="csrf-token" content="KxDoKysxiXDIRV8VXwDYlQStDGzjbGZ24y6ZgQLYAsE=">
+    <meta name="description" content="The best place to stay up-to-date with the latest Parse news and events.
+">
+    <meta name="keywords" content="backend, mobile, development, server, code">
+    <meta property="fb:app_id" content="361736430535656">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Parse">
+    <meta property="og:image" content="http://blog.parseplatform.org//assets/images/social.jpg">
+    <meta property="og:description" content="The best place to stay up-to-date with the latest Parse news and events.
+">
+    <meta property="og:url" content="http://blog.parseplatform.org//learn/the-parse-sdk-whats-inside/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body class="pure p_docs p_docs_index  user_logged_in">
+<div class="site__wrapper">
+    <div class="site__content">
+        <div class="content__wrapper">
+            <header class="site__header site__header--white">
+    <div class="container">
+        <a href="/" class="header-logo">
+            <span class="hidden">Parse</span>
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            	 viewBox="0 0 152 60" style="enable-background:new 0 0 152 60;" xml:space="preserve">
+            <g>
+            	<path class="line one" d="M23.072,39.678c-0.011,3.348-2.395,4.615-4.909,4.615c-2.851,0-4.541-1.701-4.541-4.357
+            		c0-2.964,2.031-4.667,5.35-4.725h13.611c6.428,0.079,10.137-5.391,10.137-9.953c0-4.598-3.485-9.598-9.622-9.842
+            		c-6.083-0.242-9.99,5.281-9.99,11.167v3.863"/>
+            	<path class="line two" d="M23.072,39.678c-0.011,3.348-2.395,4.615-4.909,4.615c-2.851,0-4.541-1.701-4.541-4.357
+            		c0-2.964,2.031-4.667,5.35-4.725h13.611c6.428,0.079,10.137-5.391,10.137-9.953c0-4.598-3.485-9.598-9.622-9.842
+            		c-6.083-0.242-9.99,5.281-9.99,11.167v3.863"/>
+            	<path class="line three" d="M23.072,39.678c-0.011,3.348-2.395,4.615-4.909,4.615c-2.851,0-4.541-1.701-4.541-4.357
+            		c0-2.964,2.031-4.667,5.35-4.725h13.611c6.428,0.079,10.137-5.391,10.137-9.953c0-4.598-3.485-9.598-9.622-9.842
+            		c-6.083-0.242-9.99,5.281-9.99,11.167v3.863"/>
+            	<path class="st1" d="M151.88,31.106c0-4.561-2.575-7.835-7.173-7.872c-5.665-0.037-9.197,4.12-9.197,10.484v0.11
+            		c0,6.033,3.863,9.601,9.601,9.601c1.839,0,4.083-0.405,5.739-1.177v-3.568c-1.839,0.956-3.752,1.398-5.408,1.398
+            		c-3.568,0-6.07-1.803-6.18-5.959h12.36C151.807,33.056,151.88,32.026,151.88,31.106z M148.312,31.07h-8.829
+            		c0.625-3.053,2.354-4.745,4.966-4.745c2.575,0,3.863,1.729,3.863,4.561V31.07z"/>
+            	<path class="st1" d="M125.725,34.712l0.405,0.147c2.869,1.03,3.531,1.655,3.531,2.906c0,1.471-0.993,2.428-3.458,2.428
+            		c-1.986,0-4.12-0.662-6.364-1.692v3.752c1.803,0.699,4.12,1.177,6.364,1.177c4.819,0,7.21-2.428,7.21-5.812
+            		c0-2.943-1.471-4.525-5.408-5.959l-0.405-0.147c-3.127-1.14-3.752-1.655-3.752-2.869c0-1.361,0.956-2.281,3.237-2.281
+            		c1.839,0,3.642,0.589,5.408,1.435v-3.531c-1.582-0.625-3.348-1.03-5.26-1.03c-4.598,0-7.1,2.575-7.1,5.886
+            		C120.134,31.695,121.679,33.24,125.725,34.712"/>
+            	<path class="st1" d="M110.863,29.892c1.288-2.023,3.09-3.016,5.26-3.016c0.773,0,1.508,0.11,2.17,0.331v-3.384
+            		c-0.625-0.258-1.361-0.405-2.134-0.405c-2.281,0-4.01,1.03-5.518,3.09l-0.258-2.869h-3.164v19.386h3.642V29.892z"/>
+            	<path class="st1" d="M96.481,23.197c-2.281,0-4.672,0.699-6.474,1.692v3.605c2.023-1.251,4.378-2.023,6.254-2.023
+            		c2.612,0,3.679,1.14,3.679,3.274v1.619c-5.334,0.147-8.461,1.03-10.116,2.685c-1.177,1.14-1.692,2.685-1.692,4.267
+            		c0,3.274,2.354,5.15,5.702,5.15c2.244,0,4.378-0.92,6.327-2.796l0.221,2.354h3.164V30.003
+            		C103.544,25.405,101.263,23.197,96.481,23.197z M99.938,37.728c-1.471,1.619-3.2,2.722-5.297,2.722
+            		c-1.729,0-2.833-0.883-2.833-2.428c0-2.281,1.876-3.642,8.13-3.826V37.728z"/>
+            	<path class="st1" d="M77.609,17.643h-8.571v25.383h3.826v-8.314h4.745c5.923,0,9.491-3.164,9.491-8.498V26.14
+            		C87.1,20.806,83.532,17.643,77.609,17.643z M83.311,26.214c0,3.421-1.986,5.04-5.444,5.04h-5.003V21.101h5.04
+            		c3.421,0,5.408,1.619,5.408,5.04V26.214z"/>
+            	<path class="st1" d="M27.838,2.192C12.204,2.192-0.12,14.589-0.12,30.15c0,15.597,12.323,27.958,27.958,27.958
+            		c15.634,0,27.958-12.36,27.958-27.958C55.795,14.589,43.472,2.192,27.838,2.192z M32.473,36.955H18.752
+            		c-1.986,0-3.164,1.214-3.164,3.017c0,1.582,1.067,2.722,2.612,2.722c1.766,0,2.796-1.214,2.906-3.016h4.01
+            		c-0.184,4.341-2.906,6.658-6.953,6.658c-3.789,0-6.585-2.575-6.585-6.401c0-3.973,2.98-6.769,7.394-6.769h13.611
+            		c4.598,0,8.093-3.348,8.093-7.909c0-4.598-3.127-7.799-7.578-7.799c-4.414,0-7.946,3.237-7.946,9.123v3.863h-4.046v-3.863
+            		c0-7.872,5.076-12.986,12.066-12.986c6.695,0,11.551,4.782,11.551,11.588C44.723,32.026,39.499,36.955,32.473,36.955z"/>
+            </g>
+            </svg>
+        </a>
+        <a class="header-hamburger" data-menu-trigger="toggle">
+            <span class="header-hamburger__wrap">
+                <span class="header-hamburger__line--top"></span>
+                <span class="header-hamburger__line--middle"></span>
+                <span class="header-hamburger__line--bottom"></span>
+                <span class="header-hamburger__line--arrow-top"></span>
+                <span class="header-hamburger__line--arrow-bottom"></span>
+            </span>
+        </a>
+        <ul class="header-nav">
+            <li><a href="http://docs.parseplatform.org">Docs</a></li>
+            <li><a class="active" href="/">Blog</a></li>
+        </ul>
+	</div><!-- container -->
+</header>
+
+            <aside class="hero hero--docs-landing">
+    <div class="grid-container">
+        <div class="col--9">
+            <div class="hero--docs-landing__content">
+                
+                
+                <div>
+    <span class="author">Grantland Chew -</span>
+    <span class="date">
+        August
+        
+        13th,
+        
+        2015
+    </span>
+</div>
+
+                <h1 class="h1 h1--white">
+                    The Parse SDK: What’s inside?
+                </h1>
+            </div>
+        </div>
+    </div>
+</aside><!-- .hero -->
+<div class="container padding-top-40 padding-bottom-50" data-nav-waypoint>
+    <article role="article" class="posts">
+        
+        <div>
+    
+    <a href="/blog/categories/engineering" class="btn btn--dark--outline btn--xsmall category">Engineering</a>
+    
+    <a href="/blog/categories/learn" class="btn btn--dark--outline btn--xsmall category">Learn</a>
+    
+</div>
+
+        <div class="padding-bottom-20 padding-top-20">
+  
+  
+  <img src="/assets//wp-content/uploads/2015/08/Parse_Illustration-21.jpg"></iframe>
+  
+</div>
+        <div class="padding-bottom-40 post"><p>The Parse SDK has been and continues to be an important part of mobile development on Parse. As Parse developers, you’ve already gotten to know the Parse SDK from its public API, but today we <a href="http://blog.parse.com/announcements/open-sourcing-our-sdks/">open sourced our SDKs</a> so you’ll finally be able to take a peek at its inner workings.</p>
+
+<p>In this post, <strong>we’ll unpack a few of the most challenging aspects</strong> of building the Parse SDKs — structuring an asynchronous API, decoupling architecture, and achieving API consistency. Over the next few weeks, we’ll publish a series of blog posts diving into even more under-the-hood features of our SDKs.</p>
+
+<hr />
+
+<h2 id="asynchronous-api">Asynchronous API</h2>
+
+<p>Some of the important functionalities of the Parse SDK include communicating over the network, persisting data to disk, and returning data to the developer so that they can update their UI. All of this needs to happen asynchronously, in parallel and off the main thread. With this in mind, it should be no surprise to you that the most important part of our SDK is how we do asynchronous programming. Last year, we released <code class="highlighter-rouge">Tasks</code> as a part of <a href="http://blog.parse.com/announcements/lets-bolt/">Bolts</a>, a composable promise-based library that simplifies parallelism and concurrency. We mentioned that we used it internally to solve some of our concurrency issues, but now you can finally see the extent of it.</p>
+
+<p>Almost all of our internal APIs are Task-based. We utilize them to simplify serial execution of asynchronous operations such as persisting a dependency chain of <code class="highlighter-rouge">ParseObject</code>s to the server as well as parallel asynchronous operations such as persisting batches of unrelated <code class="highlighter-rouge">ParseObject</code>s. It’s so powerful that we’re even able to manage splicing the two together into a single asynchronous operation.</p>
+
+<pre class="line-numbers"><code class="language-java">/**
+&nbsp;* Saves a collection of objects in serial batches of leaf nodes.
+&nbsp;*/
+public Task&lt;Void&gt; deepSaveAsync(List&lt;ParseObject&gt; objects) {
+&nbsp;&nbsp;&nbsp;&nbsp;if (hasCycle(objects)) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return Task.forError(new RuntimeException("Unable to save a ParseObject with a relation to a cycle"));
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;Task&lt;Void&gt; task = Task.forResult(null);
+
+&nbsp;&nbsp;&nbsp;&nbsp;List&lt;ParseObject&gt; remaining = new ArrayList&lt;&gt;(objects);
+&nbsp;&nbsp;&nbsp;&nbsp;while (remaining.size() &gt; 0) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;ParseObject&gt; batch = collectLeafNodes(objects);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;remaining.removeAll(batch);
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Execute each batch operation serially, awaiting until
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// the previous has completed.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;task = task.onSuccessTask((t) -&gt; {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return saveAllAsync(batch);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;return task;
+}
+
+/**
+&nbsp;* Saves batches of objects in parallel.
+&nbsp;*/
+public Task&lt;Void&gt; saveAllAsync(List&lt;ParseObject&gt; objects) {
+&nbsp;&nbsp;&nbsp;&nbsp;if (objects.size() &gt; MAX_BATCH_SIZE) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// The collection of objects is too big for a single batch,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// so partition the collection and execute each batch
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// in parallel.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;List&lt;ParseObject&gt;&gt; partitioned = Lists.partition(objects, MAX_BATCH_SIZE);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Task&lt;Void&gt;&gt; tasks = new ArrayList&lt;&gt;();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (List&lt;ParseObject&gt; partition : partitioned) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tasks.add(saveAllAsync(partition);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return Task.whenAll(tasks);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;return executeBatchCommand(objects);
+}
+
+// * Abridged, for clarity</code></pre>
+
+<p>Writing asynchronous APIs is a breeze with <code class="highlighter-rouge">Tasks</code> and we highly recommend taking a deeper look both at Bolts Framework: <a href="https://github.com/BoltsFramework/Bolts-Android">Android</a>, <a href="https://github.com/BoltsFramework/Bolts-iOS">iOS/OS X</a> and our SDKs: <a href="https://github.com/ParsePlatform/Parse-SDK-Android">Android</a>, <a href="https://github.com/ParsePlatform/Parse-SDK-iOS-OSX">iOS/OS X</a></p>
+
+<h2 id="decoupled-architecture-and-api-consistency">Decoupled Architecture and API Consistency</h2>
+
+<p>Keeping the Parse SDK experience as easy and delightful as possible is one of our highest priorities. However, it’s hard to add new features and make our SDK more robust without making breaking changes. Additionally, as our codebase grows, we need to ensure that our code stays testable so that we can deliver the most stable experience to our developers.</p>
+
+<p>To solve all this, we’ve adopted a decoupled architecture model that consists of our public API object instances, object states, controllers, and REST protocol. Each piece is encapsulated to ensure separation of concerns and different implementations allow us to add new features without modifying too much code. Here’s a diagram of how this all comes together:<figure id="attachment_3695" style="width: 1400px" class="wp-caption alignnone"></figure></p>
+
+<p><img class="wp-image-3695 size-full" src="http://blog.parseplatform.org//assets/wp-content/uploads/2015/08/new-sdk-diagram.jpg" alt="" width="1400" height="800" srcset="http://blog.parseplatform.org//assets/wp-content/uploads/2015/08/new-sdk-diagram.jpg 1400w, http://blog.parseplatform.org//assets/wp-content/uploads/2015/08/new-sdk-diagram-300x171.jpg 300w, http://blog.parseplatform.org//assets/wp-content/uploads/2015/08/new-sdk-diagram-1024x585.jpg 1024w, http://blog.parseplatform.org//assets/wp-content/uploads/2015/08/new-sdk-diagram-875x500.jpg 875w" sizes="(max-width: 1400px) 100vw, 1400px" />&lt;figcaption class="wp-caption-text"&gt;Our decoupled architecture model.&lt;/figcaption&gt;&lt;/figure&gt;</p>
+
+<h2 id="object-instance">Object Instance</h2>
+
+<p>The object instance is the piece that allows us to maintain an easy-to-use and unchanging API. For <code class="highlighter-rouge">ParseObject</code>, this is the API surface layer that contains getting and setting <code class="highlighter-rouge">ParseObject</code> properties, as well as saving, fetching, and deleting. As long as we keep this intact, we can refactor and add new features on the underlying levels without any breaking changes.</p>
+
+<h2 id="state">State</h2>
+
+<p>The state refers to the combination of the internal state of the object. For <code class="highlighter-rouge">ParseObject</code>, it is the current representation of itself on the server, the collection of mutations that have performed locally, and a cache of its current representation locally.</p>
+
+<p>These state instances also define the interface in which the object instance and controller interact. The object instance passes its current state to the controller, the controller returns a new state back, and the object instance then updates itself with the new state.</p>
+
+<h2 id="controller">Controller</h2>
+
+<p>The controller defines all the actions that can be performed on each Parse type: A <code class="highlighter-rouge">ParseObject</code> can be saved, fetched, and deleted, a <code class="highlighter-rouge">ParseQuery</code> can be found and counted, and a <code class="highlighter-rouge">ParseFile</code> can be saved and fetched.</p>
+
+<p>Our basic controllers serialize and deserialize our object states into our public REST format and pass along all requests to our internal networking logic. This prevents us from needing to complicate our instance and state implementations with unnecessary serialization and deserialization logic as well as affording us to be able to instrument our code for better testability.</p>
+
+<p>We’ve also designed our controllers to be extendable to offer additional functionality other than communicating with Parse. One instance of this is Local Datastore. For this new feature, we were able to create another implementation of our <code class="highlighter-rouge">ParseQueryController</code>, but instead of communicating over the network with Parse it queried for objects locally on the device.</p>
+
+<hr />
+
+<h3 id="stay-tuned-for-more"><strong>Stay Tuned for More</strong></h3>
+
+<p>In this post, we’ve covered a few major aspects of the Parse SDK architecture and how they were built. Stay tuned for future blog posts on topics like how we approach thread safety, our test philosophy, and more!</p>
+
+<p> </p>
+
+<p><strong>Ready to dig into the code?</strong></p>
+
+<p>You can find it here for <a href="https://github.com/ParsePlatform/Parse-SDK-Android">Android</a> and <a href="https://github.com/ParsePlatform/Parse-SDK-iOS-OSX">iOS/OS X</a>.</p>
+</div>
+        <div class="copy-block margin-top-40 signature">
+            <div>
+                <span class="author">Grantland Chew</span>
+            </div>
+            <div class="margin-top-20">
+                
+                
+                
+            </div>
+        </div>
+    </article>
+</div>
+
+        </div><!-- /.content__wrapper -->
+    </div><!-- /.site__content -->
+</div><!-- /.site__wrapper -->
+</body>
+
+<script>
+    anchors.options = {
+      placement: 'left'
+    };
+    anchors.add();
+</script>
+</html>

@@ -1,0 +1,466 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>The Joy of Weekend Hacking</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="/img/favicon/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/img/favicon/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/img/favicon/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/img/favicon/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/img/favicon/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/img/favicon/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/img/favicon/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon-180x180.png">
+    <meta name="apple-mobile-web-app-title" content="Parse">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#5298fc">
+    <meta name="msapplication-TileImage" content="/img/favicon/apple-touch-icon-144x144.png">
+    <meta name="application-name" content="Parse">
+    <meta name="theme-color" content="#5298fc">
+    <!-- CSS -->
+    <!-- build:css -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/default.min.css">
+    <link href="/css/blog.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" rel="stylesheet" />
+    <!-- endbuild -->
+    <!--[if lte IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/classlist/2014.01.31/classList.min.js"></script>
+    <![endif]-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.2/anchor.js"></script>
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/ie7.css" />
+    <![endif]-->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/ie8.css" />
+    <![endif]-->
+    <!--[if lt IE 10]>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/ie89.css" />
+    <![endif]-->
+    <script>if(Function('/*@cc_on return document.documentMode===10@*/')()){document.documentElement.className+=' ie10';}</script>
+    <meta name="csrf-param" content="authenticity_token">
+    <meta name="csrf-token" content="KxDoKysxiXDIRV8VXwDYlQStDGzjbGZ24y6ZgQLYAsE=">
+    <meta name="description" content="The best place to stay up-to-date with the latest Parse news and events.
+">
+    <meta name="keywords" content="backend, mobile, development, server, code">
+    <meta property="fb:app_id" content="361736430535656">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Parse">
+    <meta property="og:image" content="http://blog.parseplatform.org//assets/images/social.jpg">
+    <meta property="og:description" content="The best place to stay up-to-date with the latest Parse news and events.
+">
+    <meta property="og:url" content="http://blog.parseplatform.org//learn/the-joy-of-weekend-hacking/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body class="pure p_docs p_docs_index  user_logged_in">
+<div class="site__wrapper">
+    <div class="site__content">
+        <div class="content__wrapper">
+            <header class="site__header site__header--white">
+    <div class="container">
+        <a href="/" class="header-logo">
+            <span class="hidden">Parse</span>
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            	 viewBox="0 0 152 60" style="enable-background:new 0 0 152 60;" xml:space="preserve">
+            <g>
+            	<path class="line one" d="M23.072,39.678c-0.011,3.348-2.395,4.615-4.909,4.615c-2.851,0-4.541-1.701-4.541-4.357
+            		c0-2.964,2.031-4.667,5.35-4.725h13.611c6.428,0.079,10.137-5.391,10.137-9.953c0-4.598-3.485-9.598-9.622-9.842
+            		c-6.083-0.242-9.99,5.281-9.99,11.167v3.863"/>
+            	<path class="line two" d="M23.072,39.678c-0.011,3.348-2.395,4.615-4.909,4.615c-2.851,0-4.541-1.701-4.541-4.357
+            		c0-2.964,2.031-4.667,5.35-4.725h13.611c6.428,0.079,10.137-5.391,10.137-9.953c0-4.598-3.485-9.598-9.622-9.842
+            		c-6.083-0.242-9.99,5.281-9.99,11.167v3.863"/>
+            	<path class="line three" d="M23.072,39.678c-0.011,3.348-2.395,4.615-4.909,4.615c-2.851,0-4.541-1.701-4.541-4.357
+            		c0-2.964,2.031-4.667,5.35-4.725h13.611c6.428,0.079,10.137-5.391,10.137-9.953c0-4.598-3.485-9.598-9.622-9.842
+            		c-6.083-0.242-9.99,5.281-9.99,11.167v3.863"/>
+            	<path class="st1" d="M151.88,31.106c0-4.561-2.575-7.835-7.173-7.872c-5.665-0.037-9.197,4.12-9.197,10.484v0.11
+            		c0,6.033,3.863,9.601,9.601,9.601c1.839,0,4.083-0.405,5.739-1.177v-3.568c-1.839,0.956-3.752,1.398-5.408,1.398
+            		c-3.568,0-6.07-1.803-6.18-5.959h12.36C151.807,33.056,151.88,32.026,151.88,31.106z M148.312,31.07h-8.829
+            		c0.625-3.053,2.354-4.745,4.966-4.745c2.575,0,3.863,1.729,3.863,4.561V31.07z"/>
+            	<path class="st1" d="M125.725,34.712l0.405,0.147c2.869,1.03,3.531,1.655,3.531,2.906c0,1.471-0.993,2.428-3.458,2.428
+            		c-1.986,0-4.12-0.662-6.364-1.692v3.752c1.803,0.699,4.12,1.177,6.364,1.177c4.819,0,7.21-2.428,7.21-5.812
+            		c0-2.943-1.471-4.525-5.408-5.959l-0.405-0.147c-3.127-1.14-3.752-1.655-3.752-2.869c0-1.361,0.956-2.281,3.237-2.281
+            		c1.839,0,3.642,0.589,5.408,1.435v-3.531c-1.582-0.625-3.348-1.03-5.26-1.03c-4.598,0-7.1,2.575-7.1,5.886
+            		C120.134,31.695,121.679,33.24,125.725,34.712"/>
+            	<path class="st1" d="M110.863,29.892c1.288-2.023,3.09-3.016,5.26-3.016c0.773,0,1.508,0.11,2.17,0.331v-3.384
+            		c-0.625-0.258-1.361-0.405-2.134-0.405c-2.281,0-4.01,1.03-5.518,3.09l-0.258-2.869h-3.164v19.386h3.642V29.892z"/>
+            	<path class="st1" d="M96.481,23.197c-2.281,0-4.672,0.699-6.474,1.692v3.605c2.023-1.251,4.378-2.023,6.254-2.023
+            		c2.612,0,3.679,1.14,3.679,3.274v1.619c-5.334,0.147-8.461,1.03-10.116,2.685c-1.177,1.14-1.692,2.685-1.692,4.267
+            		c0,3.274,2.354,5.15,5.702,5.15c2.244,0,4.378-0.92,6.327-2.796l0.221,2.354h3.164V30.003
+            		C103.544,25.405,101.263,23.197,96.481,23.197z M99.938,37.728c-1.471,1.619-3.2,2.722-5.297,2.722
+            		c-1.729,0-2.833-0.883-2.833-2.428c0-2.281,1.876-3.642,8.13-3.826V37.728z"/>
+            	<path class="st1" d="M77.609,17.643h-8.571v25.383h3.826v-8.314h4.745c5.923,0,9.491-3.164,9.491-8.498V26.14
+            		C87.1,20.806,83.532,17.643,77.609,17.643z M83.311,26.214c0,3.421-1.986,5.04-5.444,5.04h-5.003V21.101h5.04
+            		c3.421,0,5.408,1.619,5.408,5.04V26.214z"/>
+            	<path class="st1" d="M27.838,2.192C12.204,2.192-0.12,14.589-0.12,30.15c0,15.597,12.323,27.958,27.958,27.958
+            		c15.634,0,27.958-12.36,27.958-27.958C55.795,14.589,43.472,2.192,27.838,2.192z M32.473,36.955H18.752
+            		c-1.986,0-3.164,1.214-3.164,3.017c0,1.582,1.067,2.722,2.612,2.722c1.766,0,2.796-1.214,2.906-3.016h4.01
+            		c-0.184,4.341-2.906,6.658-6.953,6.658c-3.789,0-6.585-2.575-6.585-6.401c0-3.973,2.98-6.769,7.394-6.769h13.611
+            		c4.598,0,8.093-3.348,8.093-7.909c0-4.598-3.127-7.799-7.578-7.799c-4.414,0-7.946,3.237-7.946,9.123v3.863h-4.046v-3.863
+            		c0-7.872,5.076-12.986,12.066-12.986c6.695,0,11.551,4.782,11.551,11.588C44.723,32.026,39.499,36.955,32.473,36.955z"/>
+            </g>
+            </svg>
+        </a>
+        <a class="header-hamburger" data-menu-trigger="toggle">
+            <span class="header-hamburger__wrap">
+                <span class="header-hamburger__line--top"></span>
+                <span class="header-hamburger__line--middle"></span>
+                <span class="header-hamburger__line--bottom"></span>
+                <span class="header-hamburger__line--arrow-top"></span>
+                <span class="header-hamburger__line--arrow-bottom"></span>
+            </span>
+        </a>
+        <ul class="header-nav">
+            <li><a href="http://docs.parseplatform.org">Docs</a></li>
+            <li><a class="active" href="/">Blog</a></li>
+        </ul>
+	</div><!-- container -->
+</header>
+
+            <aside class="hero hero--docs-landing">
+    <div class="grid-container">
+        <div class="col--9">
+            <div class="hero--docs-landing__content">
+                
+                
+                <div>
+    <span class="author">Fosco Marotto -</span>
+    <span class="date">
+        August
+        
+        26th,
+        
+        2015
+    </span>
+</div>
+
+                <h1 class="h1 h1--white">
+                    The Joy of Weekend Hacking
+                </h1>
+            </div>
+        </div>
+    </div>
+</aside><!-- .hero -->
+<div class="container padding-top-40 padding-bottom-50" data-nav-waypoint>
+    <article role="article" class="posts">
+        
+        <div>
+    
+    <a href="/blog/categories/engineering" class="btn btn--dark--outline btn--xsmall category">Engineering</a>
+    
+    <a href="/blog/categories/learn" class="btn btn--dark--outline btn--xsmall category">Learn</a>
+    
+</div>
+
+        <div class="padding-bottom-20 padding-top-20">
+  
+  
+  <img src="/assets//wp-content/uploads/2015/08/weekend-hacking-hero.jpg"></iframe>
+  
+</div>
+        <div class="padding-bottom-40 post"><p>There’s really nothing like getting an idea on Friday, and having a working prototype by Monday. Many companies are started this way, and it’s what brings tens of thousands of people to hackathons every year. Parse does an incredible job in this space, offering a host of services which are easy to integrate. I want to tell you about how I built a fully-realized <a href="https://en.wikipedia.org/wiki/Minimum_viable_product" target="_blank">MVP</a> last weekend using <a href="https://parse.com">Parse</a>, <a href="https://heroku.com">Heroku</a>, and <a href="http://twilio.com">Twilio</a>, while fitting in an overnight vacation to Santa Cruz.</p>
+
+<hr />
+
+<h2 id="the-idea">The idea</h2>
+
+<p>In 2011, I sold two local restaurants on a text messaging service. They would advertise and encourage their customers to text a keyword to a phone number, which would subscribe them to updates from that restaurant. The restaurant could then use a web application to send messages out to their subscribers. This worked for a while, with one restaurant paying for the service for three years and religiously sending out a weekly special every Monday.</p>
+
+<p>I’ve thought about it many times since then, but Friday I came home with a mission, to make a fully automated version of this and not to worry about the billing aspect for now. Let people register a code, get subscribers, and send out text and picture messages to their followers, all from their phone without an app. I can think of a lot of scenarios where this would be a great solution, like event photo sharing, or live-stream events.</p>
+
+<p> </p>
+
+<p><img src="http://blog.parseplatform.org//assets/wp-content/uploads/2015/08/skipcode1.jpg" alt="skipcode1" width="1200" height="800" class="alignleft size-full wp-image-3745" srcset="http://blog.parseplatform.org//assets/wp-content/uploads/2015/08/skipcode1.jpg 1200w, http://blog.parseplatform.org//assets/wp-content/uploads/2015/08/skipcode1-300x200.jpg 300w, http://blog.parseplatform.org//assets/wp-content/uploads/2015/08/skipcode1-1024x683.jpg 1024w, http://blog.parseplatform.org//assets/wp-content/uploads/2015/08/skipcode1-875x583.jpg 875w" sizes="(max-width: 1200px) 100vw, 1200px" /></p>
+
+<hr />
+
+<p>##</p>
+
+<h2 id="preparation">Preparation</h2>
+
+<p>You don’t show up to a hackathon with a brand-new laptop without any software. You come prepared, with your development environment ready to go. Text editors and IDEs, revision control software, terminal emulators, and package managers are all things you’re likely to have installed. These were my pre-requisites for last weekend:</p>
+
+<h3 id="nodejs"><a href="http://nodejs.org">Node.js</a></h3>
+
+<p>I’ve been using it since 2011, and it’s currently my default platform for most projects. It comes with <a href="http://npmjs.org">npm</a>, a great package management system, which is useful for more than just downloading modules.</p>
+
+<h3 id="parse"><a href="https://parse.com">Parse</a></h3>
+
+<p>Of course I have a Parse account and the Parse <a href="https://parse.com/apps/quickstart/#cloud_code">Command Line Tool</a> installed. There’s still no easier way to store and retrieve some data than by using a Parse SDK.</p>
+
+<h3 id="twilio"><a href="https://twilio.com">Twilio</a></h3>
+
+<p>I have an account with Twilio and several phone numbers. They offer a simple and affordable API for integrating SMS and MMS with any project.</p>
+
+<h3 id="heroku"><a href="https://heroku.com">Heroku</a></h3>
+
+<p>I’ve always got the <a href="https://toolbelt.heroku.com/">Heroku Toolbelt</a> installed and ready for when I want to build something. It’s great being able to quickly deploy a service to a public-facing server, protected via SSL, and have it configured automatically.</p>
+
+<h3 id="git"><a href="http://git-scm.com/">Git</a></h3>
+
+<p>One of the most popular revision control systems, and the only one I really care to use. Plus, when I’m using a Windows machine, I really like the Git Bash terminal.</p>
+
+<h3 id="visual-studio-code"><a href="https://code.visualstudio.com/">Visual Studio Code</a></h3>
+
+<p>My new favorite text editor for projects like this. I just open a folder and start working.</p>
+
+<hr />
+
+<p>##</p>
+
+<h2 id="architecture">Architecture</h2>
+
+<p>All of the input and output for this project will be through Twilio. Text and picture messages will come in to my Twilio number, which will trigger a webhook in my application logic, and text and picture messages will be sent out using the <code class="highlighter-rouge">twilio</code> module.</p>
+
+<p>I want to run this service on Heroku, instead of just using Parse Cloud Code, because I want the full capabilities of Node.js and easy access to all of the modules in npm.</p>
+
+<p>I chose Parse to store the codes and the follower connections between phone numbers. I’ve not found a better fit for this exact scenario. I just want to persist some data, and get it back out, with the least amount of setup and administration possible. The workflow of deploying apps with Heroku and Parse is incredibly easy.</p>
+
+<h3 id="dependencies-and-npm">Dependencies and npm</h3>
+
+<p>Tools are getting very good at helping us manage dependencies. For Node.js projects, I started with a template file:</p>
+
+<pre class="line-numbers"><code class="language-javascript">{
+  "name": "",
+  "version": "",
+  "description": "",
+  "author": "",
+  "scripts": {},
+  "repository": {},
+  "dependencies": {},
+  "license": ""
+}</code></pre>
+
+<p>I filled it in with some basic details and project dependencies, then saved it as <code class="highlighter-rouge">package.json</code>:</p>
+
+<pre class="line-numbers"><code class="language-javascript">{
+  "name": "skipcodes",
+  "version": "0.1.0",
+  "description": "Broadcast SMS and MMS to subscribers",
+  "author": "Fosco Marotto &lt;thedude@fb.com&gt;",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gfosco/skipcodes.git"
+  },
+  "dependencies": {
+    "parse": "~1.5",
+    "twilio": "~2.3",
+    "express": "~4.13",
+    "underscore": "~1.8",
+    "body-parser": "~1.13"
+  },
+  "license": "proprietary"
+}</code></pre>
+
+<p>Running <code class="highlighter-rouge">npm install</code> will download and install everything to the <code class="highlighter-rouge">node_modules</code> folder. I based this project on the public <code class="highlighter-rouge">parse</code>, <code class="highlighter-rouge">twilio</code>, <code class="highlighter-rouge">express</code>, <code class="highlighter-rouge">underscore</code>, and <code class="highlighter-rouge">body-parser</code> modules.</p>
+
+<h3 id="git-1">Git</h3>
+
+<p>I initialized the project with <code class="highlighter-rouge">git init</code> and whenever I had changes to deploy, I ran <code class="highlighter-rouge">git add .</code> and <code class="highlighter-rouge">git commit -m "Some description of the update"</code>. Knowing more about working in Git would be valuable for any developer, as it’s not always this simplistic.</p>
+
+<h3 id="heroku-1">Heroku</h3>
+
+<p>Heroku sets itself up as a remote Git repository for your project. Make sure you’re logged in with <code class="highlighter-rouge">heroku login</code> and then create a new Heroku app for the project by running <code class="highlighter-rouge">heroku create</code>. When created, you’ll get the URL for your Heroku app. Use this to set up your Twilio webhooks.</p>
+
+<p>When you’re ready to deploy your code, commit everything and run <code class="highlighter-rouge">git push heroku</code>.</p>
+
+<h3 id="twilio-1">Twilio</h3>
+
+<p>I rented a phone number through Twilio and configured it using my Heroku app URL. I set up Twilio to POST all inbound SMS/MMS to <code class="highlighter-rouge">https://some-instance-1234.herokuapp.com/twiml</code>:</p>
+
+<p> </p>
+
+<p><img src="http://blog.parseplatform.org//assets/wp-content/uploads/2015/08/twilio-config-updated.png" alt="twilio-config-updated" width="1622" height="470" class="alignnone size-full wp-image-3746" srcset="http://blog.parseplatform.org//assets/wp-content/uploads/2015/08/twilio-config-updated.png 1622w, http://blog.parseplatform.org//assets/wp-content/uploads/2015/08/twilio-config-updated-300x87.png 300w, http://blog.parseplatform.org//assets/wp-content/uploads/2015/08/twilio-config-updated-1024x297.png 1024w, http://blog.parseplatform.org//assets/wp-content/uploads/2015/08/twilio-config-updated-875x254.png 875w" sizes="(max-width: 1622px) 100vw, 1622px" /></p>
+
+<p> </p>
+
+<p>They have a great logs system, so during development you can see which requests failed, and the error messages are links to more detailed information and request/response inspection.</p>
+
+<hr />
+
+<p> </p>
+
+<h2 id="iterate-iterate-iterate">Iterate, iterate, iterate</h2>
+
+<p>There are many development styles, none of which is the right way, but my personal favorite for weekend hacking is to write some code, deploy it, and see what happens. Then do that again, and again, learning something new each time, until you’re done.</p>
+
+<p>Friday night I started setting up the basics in <code class="highlighter-rouge">server.js</code>:</p>
+
+<pre class="line-numbers"><code class="language-javascript">var http = require('http');
+var twilio = require('twilio');
+var express = require('express');
+var bodyParser = require('body-parser');
+
+var twilioSid = 'some twilio sid';
+var twilioToken = 'some twilio auth token';
+var twilioClient = require('twilio')(twilioSid, twilioToken);
+
+var app = express();
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
+
+// Twilio will POST to this route when SMS/MMS is received
+app.post('/twiml', function(req, res) {
+  // Log the data sent by Twilio
+  console.log(req.body);
+  messageResponse('Hello World.', res);
+});
+
+// Launch the HTTP server serving the Express app
+http.createServer(app).listen(process.env.PORT);
+
+// Respond with TwiML indicating an SMS reply message
+function messageResponse(message, res) {
+  var resp = new twilio.TwimlResponse();
+  resp.message(function() {
+    this.body(message);
+  });
+  res.type('text/xml');
+  res.send(resp.toString());
+}</code></pre>
+
+<p>I saved and committed my work, pushed it to Heroku, and grabbed for my phone. “Test” is what I sent in, and “Hello World.” came back quickly. By starting with the simplest scenario, and building up, you’re constantly experiencing small successes and the positive feelings they provide.</p>
+
+<p>I ran <code class="highlighter-rouge">heroku logs</code> and inspected the data from Twilio, identifying which fields I needed to look at. For this project, I use <code class="highlighter-rouge">From</code>, <code class="highlighter-rouge">Body</code>, <code class="highlighter-rouge">NumMedia</code>, and <code class="highlighter-rouge">MediaUrl*</code>.</p>
+
+<p>As I started building out functionality, I kept iterating, logging things, texting and testing over and over. When I finished up on Sunday night, <code class="highlighter-rouge">server.js</code> was 350 lines, and I had 57 commits.</p>
+
+<hr />
+
+<p> </p>
+
+<h2 id="the-server-stays-running">The Server Stays Running</h2>
+
+<p>Usually you build a service that starts up, initializes itself, and then handles requests forever unless it crashes. This is a major difference between using Node.js on Heroku, compared to Parse Cloud Code where the environment is stateless and new for every request. In this case, I know there will only be a single server responding to requests, so I decided to load all the data from the database on startup. When changes are made, I update the local instance of the object and save it back to Parse.</p>
+
+<p>I wrote something like this:</p>
+
+<pre class="line-numbers"><code class="language-javascript">console.log('Loading Codes database...');
+var CODES = {};
+var query = new Parse.Query("Codes");
+query.find({ useMasterKey: true }).then(function(codes) {
+  var ct = 0;
+  _.each(codes, function(code) {
+    ct++;
+    var codeName = code.get('code').toLowerCase();
+    CODES[codeName] = code;
+  });
+  console.log('Loaded ' + ct + ' codes.');
+});</code></pre>
+
+<p>I now had a global list of all the objects in the Codes class (up to 100 by default) indexed by the lower-cased version of the text code. When an SMS comes in with that code, I can easily relate it to the <code class="highlighter-rouge">Parse.Object</code>. In the Parse Data Browser, the Codes class looks like this:</p>
+
+<p> </p>
+
+<p><img src="http://blog.parseplatform.org//assets/wp-content/uploads/2015/08/code-browser-final.png" alt="code-browser-final" width="1344" height="156" class="alignnone size-full wp-image-3747" srcset="http://blog.parseplatform.org//assets/wp-content/uploads/2015/08/code-browser-final.png 1344w, http://blog.parseplatform.org//assets/wp-content/uploads/2015/08/code-browser-final-300x35.png 300w, http://blog.parseplatform.org//assets/wp-content/uploads/2015/08/code-browser-final-1024x119.png 1024w, http://blog.parseplatform.org//assets/wp-content/uploads/2015/08/code-browser-final-875x102.png 875w" sizes="(max-width: 1344px) 100vw, 1344px" /></p>
+
+<p> </p>
+
+<p>I did the same thing with the <code class="highlighter-rouge">Phones</code> class, indexing them by the <code class="highlighter-rouge">From</code> parameter containing the phone number.</p>
+
+<hr />
+
+<p> </p>
+
+<h2 id="optimistic-updates">Optimistic updates</h2>
+
+<p>This is a weekend project, it doesn’t need to be bullet-proof. During the weekend, I wrote several functions like this:</p>
+
+<pre class="line-numbers"><code class="language-javascript">function addFollowerToCode(phoneTo, codeObj) {
+  codeObj.addUnique('followers', phoneTo);
+  codeObj.save({}, { useMasterKey: true }).then(function() {
+    console.log('codeObj saved.');
+  }, function(err) {
+    console.log('codeObj save failure.');
+    console.log(err);
+  });
+}</code></pre>
+
+<p>If for some reason this action failed, the user wouldn’t be notified and I would have to check the logs to find it. You can call this technical debt, because if the project becomes a huge success this will need to be re-written.</p>
+
+<hr />
+
+<p> </p>
+
+<h2 id="sending-messages">Sending messages</h2>
+
+<p>Once I had worked out the code system, allowing people to register codes and others to subscribe to them, my final task was to allow the owner of a code to broadcast text and picture messages to their followers. This is the function for sending plain-text messages:</p>
+
+<pre class="line-numbers"><code class="language-javascript">function sendMessageToCode(msgBody, codeObj) {
+  var followers = codeObj.get('followers');
+  if (followers &amp;&amp; followers.length) {
+    var ct = 0;
+    _.each(followers, function(target) {
+      ct++;
+      twilioClient.sendMessage({
+        'to': target,
+        'from': '+15512231337',
+        'body': codeObj.get('code') + ': ' + msgBody
+      }, function(err, response) {
+        console.log(err);
+      });
+    });
+    console.log('Sent ' + ct + ' messages for ' + codeObj.get('code') + '.');
+  }
+}</code></pre>
+
+<p>Sending MMS messages was only slightly more complicated, as I send them individually, but most of the code is identical. Before the weekend was over, I had the whole process working… registering a code with a password, subscribing to codes, unsubscribing from codes, logging in with a code and password, and broadcasting SMS/MMS from an authenticated user to all of their subscribers.</p>
+
+<p> </p>
+
+<p><img src="http://blog.parseplatform.org//assets/wp-content/uploads/2015/08/broadcast-recieve1.jpg" alt="broadcast-recieve" width="1200" height="744" class="alignnone size-full wp-image-3748" /></p>
+
+<hr />
+
+<p>##</p>
+
+<h2 id="launching-a-weekend-project">Launching a weekend project</h2>
+
+<p>When you turn an idea into code you often want to show it to other people, and learn from their reactions and feedback. You can post on your personal social media accounts, create new ones just for your project, or… why not both? Mention related figures or brands, see if you can get re-shared to larger audiences, even invest a few dollars to promote your post. For this project, I did <a href="https://twitter.com/newFosco/status/635729753312354304">all</a> <a href="https://twitter.com/SkipCodesMMS">of</a> <a href="https://twitter.com/twilio/status/635926173709529089">that</a>.</p>
+
+<blockquote class="twitter-tweet" lang="en">
+  <p lang="en" dir="ltr">
+    .<a href="https://twitter.com/newFosco">@newFosco</a> Weekend hacks FTW. Thanks for sharing your build <a href="https://twitter.com/SkipCodesMMS">@SkipCodesMMS</a>, text "Fosco" to 551-223-1337 or "Hi" to learn how get your own.
+  </p>
+  
+  <p>
+    &mdash; twilio (@twilio) <a href="https://twitter.com/twilio/status/635926173709529089">August 24, 2015</a>
+  </p>
+</blockquote>
+
+<p>Now, this is just one story of Weekend Hacking… What’s yours? Send your story to <a href="mailto:community@parse.com">community@parse.com</a> and maybe you can write the next edition of Weekend Hacking. Happy Building!</p>
+</div>
+        <div class="copy-block margin-top-40 signature">
+            <div>
+                <span class="author">Fosco Marotto</span>
+            </div>
+            <div class="margin-top-20">
+                
+                
+                
+            </div>
+        </div>
+    </article>
+</div>
+
+        </div><!-- /.content__wrapper -->
+    </div><!-- /.site__content -->
+</div><!-- /.site__wrapper -->
+</body>
+
+<script>
+    anchors.options = {
+      placement: 'left'
+    };
+    anchors.add();
+</script>
+</html>

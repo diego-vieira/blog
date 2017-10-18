@@ -1,0 +1,367 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Make a Cloud-Controlled Car using Parse for IoT</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="/img/favicon/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/img/favicon/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/img/favicon/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/img/favicon/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/img/favicon/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/img/favicon/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/img/favicon/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon-180x180.png">
+    <meta name="apple-mobile-web-app-title" content="Parse">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#5298fc">
+    <meta name="msapplication-TileImage" content="/img/favicon/apple-touch-icon-144x144.png">
+    <meta name="application-name" content="Parse">
+    <meta name="theme-color" content="#5298fc">
+    <!-- CSS -->
+    <!-- build:css -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/default.min.css">
+    <link href="/css/blog.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" rel="stylesheet" />
+    <!-- endbuild -->
+    <!--[if lte IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/classlist/2014.01.31/classList.min.js"></script>
+    <![endif]-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.2/anchor.js"></script>
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/ie7.css" />
+    <![endif]-->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/ie8.css" />
+    <![endif]-->
+    <!--[if lt IE 10]>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/ie89.css" />
+    <![endif]-->
+    <script>if(Function('/*@cc_on return document.documentMode===10@*/')()){document.documentElement.className+=' ie10';}</script>
+    <meta name="csrf-param" content="authenticity_token">
+    <meta name="csrf-token" content="KxDoKysxiXDIRV8VXwDYlQStDGzjbGZ24y6ZgQLYAsE=">
+    <meta name="description" content="The best place to stay up-to-date with the latest Parse news and events.
+">
+    <meta name="keywords" content="backend, mobile, development, server, code">
+    <meta property="fb:app_id" content="361736430535656">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Parse">
+    <meta property="og:image" content="http://blog.parseplatform.org//assets/images/social.jpg">
+    <meta property="og:description" content="The best place to stay up-to-date with the latest Parse news and events.
+">
+    <meta property="og:url" content="http://blog.parseplatform.org//learn/make-a-cloud-controlled-car-using-parse-for-iot/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body class="pure p_docs p_docs_index  user_logged_in">
+<div class="site__wrapper">
+    <div class="site__content">
+        <div class="content__wrapper">
+            <header class="site__header site__header--white">
+    <div class="container">
+        <a href="/" class="header-logo">
+            <span class="hidden">Parse</span>
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            	 viewBox="0 0 152 60" style="enable-background:new 0 0 152 60;" xml:space="preserve">
+            <g>
+            	<path class="line one" d="M23.072,39.678c-0.011,3.348-2.395,4.615-4.909,4.615c-2.851,0-4.541-1.701-4.541-4.357
+            		c0-2.964,2.031-4.667,5.35-4.725h13.611c6.428,0.079,10.137-5.391,10.137-9.953c0-4.598-3.485-9.598-9.622-9.842
+            		c-6.083-0.242-9.99,5.281-9.99,11.167v3.863"/>
+            	<path class="line two" d="M23.072,39.678c-0.011,3.348-2.395,4.615-4.909,4.615c-2.851,0-4.541-1.701-4.541-4.357
+            		c0-2.964,2.031-4.667,5.35-4.725h13.611c6.428,0.079,10.137-5.391,10.137-9.953c0-4.598-3.485-9.598-9.622-9.842
+            		c-6.083-0.242-9.99,5.281-9.99,11.167v3.863"/>
+            	<path class="line three" d="M23.072,39.678c-0.011,3.348-2.395,4.615-4.909,4.615c-2.851,0-4.541-1.701-4.541-4.357
+            		c0-2.964,2.031-4.667,5.35-4.725h13.611c6.428,0.079,10.137-5.391,10.137-9.953c0-4.598-3.485-9.598-9.622-9.842
+            		c-6.083-0.242-9.99,5.281-9.99,11.167v3.863"/>
+            	<path class="st1" d="M151.88,31.106c0-4.561-2.575-7.835-7.173-7.872c-5.665-0.037-9.197,4.12-9.197,10.484v0.11
+            		c0,6.033,3.863,9.601,9.601,9.601c1.839,0,4.083-0.405,5.739-1.177v-3.568c-1.839,0.956-3.752,1.398-5.408,1.398
+            		c-3.568,0-6.07-1.803-6.18-5.959h12.36C151.807,33.056,151.88,32.026,151.88,31.106z M148.312,31.07h-8.829
+            		c0.625-3.053,2.354-4.745,4.966-4.745c2.575,0,3.863,1.729,3.863,4.561V31.07z"/>
+            	<path class="st1" d="M125.725,34.712l0.405,0.147c2.869,1.03,3.531,1.655,3.531,2.906c0,1.471-0.993,2.428-3.458,2.428
+            		c-1.986,0-4.12-0.662-6.364-1.692v3.752c1.803,0.699,4.12,1.177,6.364,1.177c4.819,0,7.21-2.428,7.21-5.812
+            		c0-2.943-1.471-4.525-5.408-5.959l-0.405-0.147c-3.127-1.14-3.752-1.655-3.752-2.869c0-1.361,0.956-2.281,3.237-2.281
+            		c1.839,0,3.642,0.589,5.408,1.435v-3.531c-1.582-0.625-3.348-1.03-5.26-1.03c-4.598,0-7.1,2.575-7.1,5.886
+            		C120.134,31.695,121.679,33.24,125.725,34.712"/>
+            	<path class="st1" d="M110.863,29.892c1.288-2.023,3.09-3.016,5.26-3.016c0.773,0,1.508,0.11,2.17,0.331v-3.384
+            		c-0.625-0.258-1.361-0.405-2.134-0.405c-2.281,0-4.01,1.03-5.518,3.09l-0.258-2.869h-3.164v19.386h3.642V29.892z"/>
+            	<path class="st1" d="M96.481,23.197c-2.281,0-4.672,0.699-6.474,1.692v3.605c2.023-1.251,4.378-2.023,6.254-2.023
+            		c2.612,0,3.679,1.14,3.679,3.274v1.619c-5.334,0.147-8.461,1.03-10.116,2.685c-1.177,1.14-1.692,2.685-1.692,4.267
+            		c0,3.274,2.354,5.15,5.702,5.15c2.244,0,4.378-0.92,6.327-2.796l0.221,2.354h3.164V30.003
+            		C103.544,25.405,101.263,23.197,96.481,23.197z M99.938,37.728c-1.471,1.619-3.2,2.722-5.297,2.722
+            		c-1.729,0-2.833-0.883-2.833-2.428c0-2.281,1.876-3.642,8.13-3.826V37.728z"/>
+            	<path class="st1" d="M77.609,17.643h-8.571v25.383h3.826v-8.314h4.745c5.923,0,9.491-3.164,9.491-8.498V26.14
+            		C87.1,20.806,83.532,17.643,77.609,17.643z M83.311,26.214c0,3.421-1.986,5.04-5.444,5.04h-5.003V21.101h5.04
+            		c3.421,0,5.408,1.619,5.408,5.04V26.214z"/>
+            	<path class="st1" d="M27.838,2.192C12.204,2.192-0.12,14.589-0.12,30.15c0,15.597,12.323,27.958,27.958,27.958
+            		c15.634,0,27.958-12.36,27.958-27.958C55.795,14.589,43.472,2.192,27.838,2.192z M32.473,36.955H18.752
+            		c-1.986,0-3.164,1.214-3.164,3.017c0,1.582,1.067,2.722,2.612,2.722c1.766,0,2.796-1.214,2.906-3.016h4.01
+            		c-0.184,4.341-2.906,6.658-6.953,6.658c-3.789,0-6.585-2.575-6.585-6.401c0-3.973,2.98-6.769,7.394-6.769h13.611
+            		c4.598,0,8.093-3.348,8.093-7.909c0-4.598-3.127-7.799-7.578-7.799c-4.414,0-7.946,3.237-7.946,9.123v3.863h-4.046v-3.863
+            		c0-7.872,5.076-12.986,12.066-12.986c6.695,0,11.551,4.782,11.551,11.588C44.723,32.026,39.499,36.955,32.473,36.955z"/>
+            </g>
+            </svg>
+        </a>
+        <a class="header-hamburger" data-menu-trigger="toggle">
+            <span class="header-hamburger__wrap">
+                <span class="header-hamburger__line--top"></span>
+                <span class="header-hamburger__line--middle"></span>
+                <span class="header-hamburger__line--bottom"></span>
+                <span class="header-hamburger__line--arrow-top"></span>
+                <span class="header-hamburger__line--arrow-bottom"></span>
+            </span>
+        </a>
+        <ul class="header-nav">
+            <li><a href="http://docs.parseplatform.org">Docs</a></li>
+            <li><a class="active" href="/">Blog</a></li>
+        </ul>
+	</div><!-- container -->
+</header>
+
+            <aside class="hero hero--docs-landing">
+    <div class="grid-container">
+        <div class="col--9">
+            <div class="hero--docs-landing__content">
+                
+                
+                <div>
+    <span class="author">Ronald Yang -</span>
+    <span class="date">
+        May
+        
+        20th,
+        
+        2015
+    </span>
+</div>
+
+                <h1 class="h1 h1--white">
+                    Make a Cloud-Controlled Car using Parse for IoT
+                </h1>
+            </div>
+        </div>
+    </div>
+</aside><!-- .hero -->
+<div class="container padding-top-40 padding-bottom-50" data-nav-waypoint>
+    <article role="article" class="posts">
+        
+        <div>
+    
+    <a href="/blog/categories/learn" class="btn btn--dark--outline btn--xsmall category">Learn</a>
+    
+    <a href="/blog/categories/tutorial" class="btn btn--dark--outline btn--xsmall category">Tutorial</a>
+    
+</div>
+
+        <div class="padding-bottom-20 padding-top-20">
+  
+  
+</div>
+        <div class="padding-bottom-40 post"><p>If you walk into a model shop or toy store today, you’ll probably see a wide variety of remotely-controlled toy cars available. Almost all of them are RC-based (radio control), meaning you’ll lose control when outside of the radio range.</p>
+
+<p><img class="alignnone wp-image-3559 size-medium" style="border: 0pt none; float: right; padding-left: 10px; padding-bottom: 10px;" src="http://blog.parseplatform.org//assets/wp-content/uploads/2015/05/Cloud-Car-1-300x286.png" alt="Cloud Car 1" width="300" height="286" srcset="http://blog.parseplatform.org//assets/wp-content/uploads/2015/05/Cloud-Car-1-300x286.png 300w, http://blog.parseplatform.org//assets/wp-content/uploads/2015/05/Cloud-Car-1.png 535w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+
+<p>But with a cloud-controlled car, you can control it from anywhere in the world. In this post, we’ll walk you through the steps of how to build this fun toy using Parse’s <a href="http://blog.parse.com/learn/connecting-hardware-with-the-cloud-parse-for-iot/">tools for connected devices</a> (and you can find the full source code at the bottom of the post). After reading this, we hope you can build your own cloud-controlled car with much less engineering effort than ever before — or maybe this will inspire you to build something even more amazing.</p>
+
+<p>Let’s hit the road:</p>
+
+<hr />
+
+<h2 id="step-1-what-do-you-need">Step 1: What do you need?</h2>
+
+<ul class="standard-list">
+  <li>
+    <b>Car body </b>(wheels, chassis frame, motors, motor circuits): For our car body, we've adapted a <a href="http://www.amazon.com/Super-4-wheel-Chassis-Encoder-Arduino/dp/B00VT1NFP6">4-wheel Robot Smart Car Chassis Kit</a> (including four wheels, chassis, and four motors). We handcrafted the motor circuits using an <a href="http://www.amazon.com/gp/product/B00NAY2URO/">H-bridge</a>. As a handy alternative option for motor circuits, you could use a <a href="https://www.adafruit.com/products/1438">Motor Shield</a>, but in this post we'll see how we can use simple circuits to drive the car. You'll also need a <a href="http://www.amazon.com/microtivity-IB401-400-point-Experiment-Breadboard/dp/B004RXKWDQ">bread board and a bunch of wires</a>. We won't cover too much mechanical/electrical engineering here, but there you have the basics.
+  </li>
+  <li>
+    <b>Control system</b>: We used the <a href="https://www.parse.com/apps/quickstart#embedded/ticc3200">TI CC3200</a> as the controlling device, although <a href="https://www.parse.com/apps/quickstart#embedded/arduinoyun">Arduino</a>, <a href="https://www.parse.com/apps/quickstart#embedded/raspberrypi">Raspberry Pi</a>, and Intel Edison are also good options. Four GPIO pins in CC3200 are connected with the motor circuits described above.
+  </li>
+  <li>
+    <b>Power</b>: 9V battery for powering the motors, and a portable USB charger for powering the CC3200.
+  </li>
+</ul>
+
+<div style="text-align: center;">
+  <img class="alignnone wp-image-3560" src="http://blog.parseplatform.org//assets/wp-content/uploads/2015/05/Cloud-Car-2-225x300.png" alt="Cloud Car 2" width="244" height="325" srcset="http://blog.parseplatform.org//assets/wp-content/uploads/2015/05/Cloud-Car-2-225x300.png 225w, http://blog.parseplatform.org//assets/wp-content/uploads/2015/05/Cloud-Car-2.png 443w" sizes="(max-width: 244px) 100vw, 244px" />
+</div>
+
+<hr />
+
+<p>##</p>
+
+<h2 id="step-2-build-the-body-for-the-car">Step 2: Build the body for the car</h2>
+
+<p>First let us assemble the car body template including chassis, wheels and motors.</p>
+
+<p>Then we focus on building the motor circuits. If you look at the <a href="https://github.com/sudar/DCMotorBot/blob/master/datasheet/l293d.pdf?raw=true">datasheet of L293D IC</a>, you’ll find that we can control two motors simultaneously using the IC. Even though the IC operates at 5V, it can still give a higher voltage (up to 36V) to the motor.</p>
+
+<p>Here’s the pin diagram of the IC:</p>
+
+<div style="text-align: center;">
+  <img class="alignnone wp-image-3561" src="http://blog.parseplatform.org//assets/wp-content/uploads/2015/05/Cloud-Car-3.png" alt="Cloud Car 3" width="327" height="175" srcset="http://blog.parseplatform.org//assets/wp-content/uploads/2015/05/Cloud-Car-3.png 413w, http://blog.parseplatform.org//assets/wp-content/uploads/2015/05/Cloud-Car-3-300x161.png 300w" sizes="(max-width: 327px) 100vw, 327px" />
+</div>
+
+<p>As explained above, we’ll be connecting a H-bridge to a CC3200, using the following connection.</p>
+
+<div style="text-align: center;">
+  <img class="alignnone wp-image-3562" src="http://blog.parseplatform.org//assets/wp-content/uploads/2015/05/Cloud-Car-4-875x694.png" alt="Cloud Car 4" width="631" height="500" srcset="http://blog.parseplatform.org//assets/wp-content/uploads/2015/05/Cloud-Car-4-875x694.png 875w, http://blog.parseplatform.org//assets/wp-content/uploads/2015/05/Cloud-Car-4-300x238.png 300w, http://blog.parseplatform.org//assets/wp-content/uploads/2015/05/Cloud-Car-4.png 879w" sizes="(max-width: 631px) 100vw, 631px" />
+</div>
+
+<h3 id="controlling-direction-of-dc-motors">Controlling direction of DC Motors</h3>
+
+<p>As you can see from the pin diagram above, each motor has two control pins through which we can control the motor. Two motors in one side will be given same inputs, which means they’ll always rotate in same direction. The logic to control the direction of the motor is as follows:</p>
+
+<ul class="standard-list">
+  <li>
+    If control pin 1 is HIGH and control pin 2 is LOW, then the motor will rotate in one direction.
+  </li>
+  <li>
+    If control pin 1 is LOW and control pin 2 is HIGH, then the motor will rotate in the other direction.
+  </li>
+</ul>
+
+<hr />
+
+<p>##</p>
+
+<h2 id="step-3-device-programming-using-the-parse-embedded-devices-sdk">Step 3: Device programming using the Parse Embedded Devices SDK</h2>
+
+<p>The code on the CC3200 is responsible for establishing a push channel with the Parse Cloud. It interprets the received commands into electrical signals sent to GPIO pins.</p>
+
+<p>Four GPIO pins are configured, and each pair of pins are controlling two wheels on one side.</p>
+
+<pre class="line-numbers"><code class="language-csharp">&gt;// Configure PIN_16/18/61/62 for GPIO Output
+MAP_PinTypeGPIO(PIN_16, PIN_MODE_0, false);
+MAP_GPIODirModeSet(GPIOA2_BASE, 0x80, GPIO_DIR_MODE_OUT);
+MAP_PinTypeGPIO(PIN_18, PIN_MODE_0, false);
+MAP_GPIODirModeSet(GPIOA3_BASE, 0x10, GPIO_DIR_MODE_OUT);
+MAP_PinTypeGPIO(PIN_61, PIN_MODE_0, false);
+MAP_GPIODirModeSet(GPIOA0_BASE, 0x40, GPIO_DIR_MODE_OUT);
+MAP_PinTypeGPIO(PIN_62, PIN_MODE_0, false);
+MAP_GPIODirModeSet(GPIOA0_BASE, 0x80, GPIO_DIR_MODE_OUT);</code></pre>
+
+<pre class="line-numbers"><code class="language-csharp">
+#define LEFT_CONTROL_PIN1 6
+#define LEFT_CONTROL_PIN2 7
+#define RIGHT_CONTROL_PIN1 23
+#define RIGHT_CONTROL_PIN2 28</code></pre>
+
+<p>When a “drive” command is received, the code will set <strong>LEFT_CONTROL_PIN1</strong>, <strong>**RIGHT_CONTROL_PIN1</strong>** to low voltage and <strong>LEFT_CONTROL_PIN2</strong>,** <strong>RIGHT_CONTROL_PIN2</strong>** to high voltage, triggering the motors to rotate in one direction. This works in vice-versa for the “reverse” command.</p>
+
+<pre class="line-numbers"><code class="language-csharp">if (strcmp("drive", msgType) == 0) {
+  GPIO_IF_Set(**LEFT_CONTROL_PIN1**, PORT_LC1, GPIO_PIN_LC1, **0**);
+  GPIO_IF_Set(**LEFT_CONTROL_PIN2**, PORT_LC2, GPIO_PIN_LC2, **1**);
+  GPIO_IF_Set(**RIGHT_CONTROL_PIN1**, PORT_RC1, GPIO_PIN_RC1, **0**);
+  GPIO_IF_Set(**RIGHT_CONTROL_PIN2**, PORT_RC2, GPIO_PIN_RC2, **1**);
+
+  UtilsDelay(period); // 1000 ms
+
+  GPIO_IF_Set(LEFT_CONTROL_PIN1, PORT_LC1, GPIO_PIN_LC1, 0);
+  GPIO_IF_Set(LEFT_CONTROL_PIN2, PORT_LC2, GPIO_PIN_LC2, 0);
+  GPIO_IF_Set(RIGHT_CONTROL_PIN1, PORT_RC1, GPIO_PIN_RC1, 0);
+  GPIO_IF_Set(RIGHT_CONTROL_PIN2, PORT_RC2, GPIO_PIN_RC2, 0);
+
+} else if (strcmp("reverse", msgType) == 0) {
+  GPIO_IF_Set(**LEFT_CONTROL_PIN1**, PORT_LC1, GPIO_PIN_LC1, **1**);
+  GPIO_IF_Set(**LEFT_CONTROL_PIN2**, PORT_LC2, GPIO_PIN_LC2, **0**);
+  GPIO_IF_Set(**RIGHT_CONTROL_PIN1**, PORT_RC1, GPIO_PIN_RC1, **1**);
+  GPIO_IF_Set(**RIGHT_CONTROL_PIN2**, PORT_RC2, GPIO_PIN_RC2, **0**);
+
+  UtilsDelay(period); // 1000 ms
+
+  GPIO_IF_Set(LEFT_CONTROL_PIN1, PORT_LC1, GPIO_PIN_LC1, 0);
+  GPIO_IF_Set(LEFT_CONTROL_PIN2, PORT_LC2, GPIO_PIN_LC2, 0);
+  GPIO_IF_Set(RIGHT_CONTROL_PIN1, PORT_RC1, GPIO_PIN_RC1, 0);
+  GPIO_IF_Set(RIGHT_CONTROL_PIN2, PORT_RC2, GPIO_PIN_RC2, 0);
+}</code></pre>
+
+<p>We’re not showing the device code in its entirety here, but the structure follows the <a href="https://github.com/ParsePlatform/parse-embedded-sdks/tree/master/cc3200/samples/blink">Blink example</a>, with the above code being called from the push notifications handler.</p>
+
+<hr />
+
+<p>##</p>
+
+<h2 id="step-4-set-up-your-cloud-code">Step 4: Set up your Cloud Code</h2>
+
+<p>Deployed in Cloud Code, we have a JavaScript function here:</p>
+
+<pre class="line-numbers"><code class="language-javascript">Parse.Cloud.afterSave("Message", function(request, response) {
+  var installationId = request.object.get("installationId");
+  var query = new Parse.Query(Parse.Installation);
+  if (installationId !== null &amp;&amp; installationId !== undefined) {
+    query.equalTo("installationId", installationId);
+  } else {
+    return;
+  }
+
+  Parse.Push.send({
+    where: query,
+    data: request.object.get("value"),
+  },
+  {
+    success: function() {
+      console.log("sending push to device");
+    },
+    error: function(err) {
+      console.log(err);
+    }
+  });
+});</code></pre>
+
+<p>A custom class, “Message,” should be created after deploying the Cloud Code. When a Message object is saved, this cloud function sends a push to the device, and that has the same installationId as in the Message object saved. That being said, saving an object like</p>
+
+<pre class="line-numbers"><code class="language-csharp">{"installationId":"YOUR_CAR_INSTALLATION_ID","value":{"alert": "drive"}}</code></pre>
+
+<p>will tell Parse to send a drive command to the car.</p>
+
+<hr />
+
+<p>##</p>
+
+<h2 id="step-5-play-with-the-car">Step 5: Play with the car!</h2>
+
+<p>Now we can put our wheels to the test. We prototyped two ways to control the car. <img class="alignnone size-full wp-image-3563" style="border: 0pt none; float: right; padding-left: 10px; padding-bottom: 10px;" src="http://blog.parseplatform.org//assets/wp-content/uploads/2015/05/Cloud-Car-5.png" alt="Cloud Car 5" width="287" height="509" srcset="http://blog.parseplatform.org//assets/wp-content/uploads/2015/05/Cloud-Car-5.png 287w, http://blog.parseplatform.org//assets/wp-content/uploads/2015/05/Cloud-Car-5-169x300.png 169w" sizes="(max-width: 287px) 100vw, 287px" /></p>
+
+<ul class="standard-list">
+  <li>
+    <b>Control with mobile: </b>We've developed an iOS app you can use to provisioning your car (create Parse installation object, configure WiFi) and send a control command remotely. The Android version is also available upon request.
+  </li>
+</ul>
+
+<ul class="standard-list">
+  <li>
+    <b>Control with speech</b>: <a href="http://wit.ai">wit.ai</a> provides a great speech-to-intent service, which enables us to send a voice control command. Check out this demo <a href="https://www.facebook.com/siyinyang/videos/vb.1332893165/10204372010483685/">video</a>.
+  </li>
+</ul>
+
+<p>And that’s all there is to it! You can find the full code in this <a href="https://github.com/ParsePlatform/InternetCar">Github repo</a>. We’d love to hear your feedback, and please let us know what amazing things you’ve built with Parse for IoT.</p>
+</div>
+        <div class="copy-block margin-top-40 signature">
+            <div>
+                <span class="author">Ronald Yang</span>
+            </div>
+            <div class="margin-top-20">
+                
+                
+                
+            </div>
+        </div>
+    </article>
+</div>
+
+        </div><!-- /.content__wrapper -->
+    </div><!-- /.site__content -->
+</div><!-- /.site__wrapper -->
+</body>
+
+<script>
+    anchors.options = {
+      placement: 'left'
+    };
+    anchors.add();
+</script>
+</html>

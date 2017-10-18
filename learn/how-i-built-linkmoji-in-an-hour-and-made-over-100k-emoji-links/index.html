@@ -1,0 +1,501 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>How I Built Linkmoji in an Hour (and made over 100k emoji links)</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="/img/favicon/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/img/favicon/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/img/favicon/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/img/favicon/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/img/favicon/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/img/favicon/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/img/favicon/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon-180x180.png">
+    <meta name="apple-mobile-web-app-title" content="Parse">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#5298fc">
+    <meta name="msapplication-TileImage" content="/img/favicon/apple-touch-icon-144x144.png">
+    <meta name="application-name" content="Parse">
+    <meta name="theme-color" content="#5298fc">
+    <!-- CSS -->
+    <!-- build:css -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/default.min.css">
+    <link href="/css/blog.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" rel="stylesheet" />
+    <!-- endbuild -->
+    <!--[if lte IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/classlist/2014.01.31/classList.min.js"></script>
+    <![endif]-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.2/anchor.js"></script>
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/ie7.css" />
+    <![endif]-->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/ie8.css" />
+    <![endif]-->
+    <!--[if lt IE 10]>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/ie89.css" />
+    <![endif]-->
+    <script>if(Function('/*@cc_on return document.documentMode===10@*/')()){document.documentElement.className+=' ie10';}</script>
+    <meta name="csrf-param" content="authenticity_token">
+    <meta name="csrf-token" content="KxDoKysxiXDIRV8VXwDYlQStDGzjbGZ24y6ZgQLYAsE=">
+    <meta name="description" content="The best place to stay up-to-date with the latest Parse news and events.
+">
+    <meta name="keywords" content="backend, mobile, development, server, code">
+    <meta property="fb:app_id" content="361736430535656">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Parse">
+    <meta property="og:image" content="http://blog.parseplatform.org//assets/images/social.jpg">
+    <meta property="og:description" content="The best place to stay up-to-date with the latest Parse news and events.
+">
+    <meta property="og:url" content="http://blog.parseplatform.org//learn/how-i-built-linkmoji-in-an-hour-and-made-over-100k-emoji-links/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body class="pure p_docs p_docs_index  user_logged_in">
+<div class="site__wrapper">
+    <div class="site__content">
+        <div class="content__wrapper">
+            <header class="site__header site__header--white">
+    <div class="container">
+        <a href="/" class="header-logo">
+            <span class="hidden">Parse</span>
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            	 viewBox="0 0 152 60" style="enable-background:new 0 0 152 60;" xml:space="preserve">
+            <g>
+            	<path class="line one" d="M23.072,39.678c-0.011,3.348-2.395,4.615-4.909,4.615c-2.851,0-4.541-1.701-4.541-4.357
+            		c0-2.964,2.031-4.667,5.35-4.725h13.611c6.428,0.079,10.137-5.391,10.137-9.953c0-4.598-3.485-9.598-9.622-9.842
+            		c-6.083-0.242-9.99,5.281-9.99,11.167v3.863"/>
+            	<path class="line two" d="M23.072,39.678c-0.011,3.348-2.395,4.615-4.909,4.615c-2.851,0-4.541-1.701-4.541-4.357
+            		c0-2.964,2.031-4.667,5.35-4.725h13.611c6.428,0.079,10.137-5.391,10.137-9.953c0-4.598-3.485-9.598-9.622-9.842
+            		c-6.083-0.242-9.99,5.281-9.99,11.167v3.863"/>
+            	<path class="line three" d="M23.072,39.678c-0.011,3.348-2.395,4.615-4.909,4.615c-2.851,0-4.541-1.701-4.541-4.357
+            		c0-2.964,2.031-4.667,5.35-4.725h13.611c6.428,0.079,10.137-5.391,10.137-9.953c0-4.598-3.485-9.598-9.622-9.842
+            		c-6.083-0.242-9.99,5.281-9.99,11.167v3.863"/>
+            	<path class="st1" d="M151.88,31.106c0-4.561-2.575-7.835-7.173-7.872c-5.665-0.037-9.197,4.12-9.197,10.484v0.11
+            		c0,6.033,3.863,9.601,9.601,9.601c1.839,0,4.083-0.405,5.739-1.177v-3.568c-1.839,0.956-3.752,1.398-5.408,1.398
+            		c-3.568,0-6.07-1.803-6.18-5.959h12.36C151.807,33.056,151.88,32.026,151.88,31.106z M148.312,31.07h-8.829
+            		c0.625-3.053,2.354-4.745,4.966-4.745c2.575,0,3.863,1.729,3.863,4.561V31.07z"/>
+            	<path class="st1" d="M125.725,34.712l0.405,0.147c2.869,1.03,3.531,1.655,3.531,2.906c0,1.471-0.993,2.428-3.458,2.428
+            		c-1.986,0-4.12-0.662-6.364-1.692v3.752c1.803,0.699,4.12,1.177,6.364,1.177c4.819,0,7.21-2.428,7.21-5.812
+            		c0-2.943-1.471-4.525-5.408-5.959l-0.405-0.147c-3.127-1.14-3.752-1.655-3.752-2.869c0-1.361,0.956-2.281,3.237-2.281
+            		c1.839,0,3.642,0.589,5.408,1.435v-3.531c-1.582-0.625-3.348-1.03-5.26-1.03c-4.598,0-7.1,2.575-7.1,5.886
+            		C120.134,31.695,121.679,33.24,125.725,34.712"/>
+            	<path class="st1" d="M110.863,29.892c1.288-2.023,3.09-3.016,5.26-3.016c0.773,0,1.508,0.11,2.17,0.331v-3.384
+            		c-0.625-0.258-1.361-0.405-2.134-0.405c-2.281,0-4.01,1.03-5.518,3.09l-0.258-2.869h-3.164v19.386h3.642V29.892z"/>
+            	<path class="st1" d="M96.481,23.197c-2.281,0-4.672,0.699-6.474,1.692v3.605c2.023-1.251,4.378-2.023,6.254-2.023
+            		c2.612,0,3.679,1.14,3.679,3.274v1.619c-5.334,0.147-8.461,1.03-10.116,2.685c-1.177,1.14-1.692,2.685-1.692,4.267
+            		c0,3.274,2.354,5.15,5.702,5.15c2.244,0,4.378-0.92,6.327-2.796l0.221,2.354h3.164V30.003
+            		C103.544,25.405,101.263,23.197,96.481,23.197z M99.938,37.728c-1.471,1.619-3.2,2.722-5.297,2.722
+            		c-1.729,0-2.833-0.883-2.833-2.428c0-2.281,1.876-3.642,8.13-3.826V37.728z"/>
+            	<path class="st1" d="M77.609,17.643h-8.571v25.383h3.826v-8.314h4.745c5.923,0,9.491-3.164,9.491-8.498V26.14
+            		C87.1,20.806,83.532,17.643,77.609,17.643z M83.311,26.214c0,3.421-1.986,5.04-5.444,5.04h-5.003V21.101h5.04
+            		c3.421,0,5.408,1.619,5.408,5.04V26.214z"/>
+            	<path class="st1" d="M27.838,2.192C12.204,2.192-0.12,14.589-0.12,30.15c0,15.597,12.323,27.958,27.958,27.958
+            		c15.634,0,27.958-12.36,27.958-27.958C55.795,14.589,43.472,2.192,27.838,2.192z M32.473,36.955H18.752
+            		c-1.986,0-3.164,1.214-3.164,3.017c0,1.582,1.067,2.722,2.612,2.722c1.766,0,2.796-1.214,2.906-3.016h4.01
+            		c-0.184,4.341-2.906,6.658-6.953,6.658c-3.789,0-6.585-2.575-6.585-6.401c0-3.973,2.98-6.769,7.394-6.769h13.611
+            		c4.598,0,8.093-3.348,8.093-7.909c0-4.598-3.127-7.799-7.578-7.799c-4.414,0-7.946,3.237-7.946,9.123v3.863h-4.046v-3.863
+            		c0-7.872,5.076-12.986,12.066-12.986c6.695,0,11.551,4.782,11.551,11.588C44.723,32.026,39.499,36.955,32.473,36.955z"/>
+            </g>
+            </svg>
+        </a>
+        <a class="header-hamburger" data-menu-trigger="toggle">
+            <span class="header-hamburger__wrap">
+                <span class="header-hamburger__line--top"></span>
+                <span class="header-hamburger__line--middle"></span>
+                <span class="header-hamburger__line--bottom"></span>
+                <span class="header-hamburger__line--arrow-top"></span>
+                <span class="header-hamburger__line--arrow-bottom"></span>
+            </span>
+        </a>
+        <ul class="header-nav">
+            <li><a href="http://docs.parseplatform.org">Docs</a></li>
+            <li><a class="active" href="/">Blog</a></li>
+        </ul>
+	</div><!-- container -->
+</header>
+
+            <aside class="hero hero--docs-landing">
+    <div class="grid-container">
+        <div class="col--9">
+            <div class="hero--docs-landing__content">
+                
+                
+                <div>
+    <span class="author">Eric Nakagawa -</span>
+    <span class="date">
+        July
+        
+        14th,
+        
+        2015
+    </span>
+</div>
+
+                <h1 class="h1 h1--white">
+                    How I Built Linkmoji in an Hour (and made over 100k emoji links)
+                </h1>
+            </div>
+        </div>
+    </div>
+</aside><!-- .hero -->
+<div class="container padding-top-40 padding-bottom-50" data-nav-waypoint>
+    <article role="article" class="posts">
+        
+        <div>
+    
+    <a href="/blog/categories/learn" class="btn btn--dark--outline btn--xsmall category">Learn</a>
+    
+    <a href="/blog/categories/tutorial" class="btn btn--dark--outline btn--xsmall category">Tutorial</a>
+    
+</div>
+
+        <div class="padding-bottom-20 padding-top-20">
+  
+  
+  <img src="/assets//wp-content/uploads/2015/07/linkmoji-hero.png"></iframe>
+  
+</div>
+        <div class="padding-bottom-40 post"><section class=" section--body"> 
+
+<p class="section-divider layoutSingleColumn">
+  <em>This is a personal story written by Eric Nakagawa, Parse Developer Advocate, about his side-project <a href="http://www.xn--vi8hiv.ws/">linkmoji</a>. linkmoji is built on Parse. linkmoji is hosted on the free tier and currently uses less than half the 30 req/s available! This story was originally published on <a href="https://medium.com/@ericnakagawa/how-i-built-linkmoji-in-an-hour-fab662e37960">Medium</a>.</em>
+</p></section>
+<section class=" section--body"> 
+
+<div class="section-content">
+  <div class="section-inner layoutSingleColumn">
+    <hr />
+    
+    <p class="graf--p">
+      While hanging out at my neighborhood public library this week, I built <a class="markup--anchor markup--p-anchor" href="http://www.xn--vi8hiv.ws/">linkmoji</a>, a link shortener that lets you easily convert a long URL into a short URL that’s made up of emoji! I created it with my friend and fellow emoji-fanatic <a class="markup--anchor markup--p-anchor" href="http://🍕💩.ws/💯💯💯">George</a> on Wednesday night. In the last 36 hours, we’ve currently seen over <strong class="markup--strong markup--p-strong">100,000</strong> emoji links created!!
+    </p>
+  </div>
+  
+  <div class="section-inner sectionLayout--outsetColumn">
+    <figure class="graf--figure graf--layoutOutsetCenter">
+      <div class="aspectRatioPlaceholder is-locked">
+        <p>
+          <img class=" aligncenter" src="https://d262ilb51hltx0.cloudfront.net/max/2000/1*ZnrLZ4wH0nBAlGptqIERlA.png" alt="" width="998" height="173" />
+        </p>
+      </div>
+      </figure>
+  </div>
+  
+  <div class="section-inner layoutSingleColumn">
+    <h4 class="graf--h4">
+      Ok, but why?
+    </h4>
+    <p class="graf--p">
+      A <a class="markup--anchor markup--p-anchor" href="http://forge.im/jared">friend</a> challenged me to build a link shortener over the weekend. Initially I set out to build a link shortener that would a generate a random selection of words. ex. <a class="markup--anchor markup--p-anchor" href="http://🍕💩.ws/pizza-king">http://🍕💩.ws/pizza-king</a> — but while writing the logic for selecting words from a dictionary, I realized it would be more fun to use emoji.
+    </p>
+  </div>
+</div></section>
+<section class=" section--body"> 
+
+<div class="section-divider layoutSingleColumn">
+  <hr class="section-divider" />
+</div>
+
+<div class="section-content">
+  <div class="section-inner layoutSingleColumn">
+    <h4 class="graf--h4">
+      Building linkmoji
+    </h4>
+    <p class="graf--p">
+      I grabbed a bunch of my favorite emoji, put them into a comma separated array, and started hacking away at a web app.
+    </p>
+    <p>
+      Next I built a function that recursively iterates and generates a string of emoji. At our current count we have 100+ emoji supported. The algorithm selects one of the 100, removes that emoji from the list, then randomly selects from the remaining emoji until the total number of emoji characters is reached. (100 x 99 x 98 x 99 x 98 x 97 x 96 x 95 = 8,327,010,517,056,000 (8 quadrillon 😱) potential linkmojis. It is quite doubtful we’ll ever use up all possible combinations, but in the meantime I’ll keep adding more emoji to the dictionary. Once a string of emoji is generated, it is saved to Parse. I set up a beforeSave function to query the links table to check if any other link has the same emoji and to generate a new one if it already exists. This should prevent emoji collisions.   The way I generate textmoji is by first creating a JSON object that maps emoji to English words. I then convert the emoji string into an array, iterate through, and build textmoji strings (one with, and one without hyphens). Here is the map of emoji to text.
+    </p>
+    
+    <p class="graf--p">
+      I uncovered several issues with how Javascript handles unicode. Since unicode uses more space than a normal string character, it requires different handling. The current implementation of JS doesn’t support easily iterating through strings with unicode, but I found <a class="markup--anchor markup--p-anchor" href="http://stackoverflow.com/questions/24531751/how-can-i-split-a-string-containing-emoji-into-an-array/24531752#24531752">this function</a> that converts the unicode string into an Array. An array is exactly what I needed for generating these strings as I use each emoji as a key when looking up the corresponding text value for each mapped object. (👑 -&gt; “crown”).
+    </p>
+    
+    <p class="graf--p">
+      From here it was all a matter of displaying the information after the user had submitted their links. This is done by rendering an html file converted to ejs, passing the linkmoji and txtmoji urls to the template, rendering and sending to the browser (all handled by ExpressJS and Parse Webhosting).
+    </p>
+    
+    <h4 class="graf--h4">
+      Visiting a linkmoji
+    </h4>
+    
+    <p class="graf--p">
+      Because I don’t know whether a visitor is providing a linkmoji, textmoji, or textmoji without hyphens, I OR together multiple several Parse queries and take the first, oldest link by create date. I also update the view count and then route the user. Here’s the code:
+    </p>
+    
+    <p>
+    </p>
+  </div>
+</div></section>
+<section class=" section--body"> 
+
+<div class="section-content">
+  <div class="section-inner layoutSingleColumn">
+    <h3 class="graf--h3">
+      The Launch
+    </h3>
+    
+    <p class="graf--p">
+      Around 6pm Wednesday I tweeted out a very roughly hacked together website.
+    </p>
+    
+    <blockquote class="twitter-tweet" width="550">
+      <p lang="en" dir="ltr">
+        I built this today: <a href="http://t.co/zwfUBBiyCw">http://t.co/zwfUBBiyCw</a>🍕💩&#10;&#10;I call it linkmoji.
+      </p>
+      
+      <p>
+        &mdash; Eric Nakagawa (ナカガワ) (@ericnakagawa) <a href="https://twitter.com/ericnakagawa/status/618950426369593344">July 9, 2015</a>
+      </p>
+    </blockquote>
+    
+    <p>
+    </p>
+    
+    <p class="graf--p">
+      <a class="markup--anchor markup--p-anchor" href="http://twitter.com/gk3">George</a> sees my tweet and sends me a message offering to do give it a real design. I happily accept.
+    </p>
+    
+    <p class="graf--p">
+      <em class="markup--em markup--p-em">Disclaimer: George and </em><a class="markup--anchor markup--p-anchor" href="http://eric@parse.com"><em class="markup--em markup--p-em">Eric</em></a><em class="markup--em markup--p-em"> both work on the Parse team (acquired by Facebook </em>👍<em class="markup--em markup--p-em">). Linkmoji is a personal project they build on their own time.</em>
+    </p>
+    
+    <p class="graf--p">
+      An hour later someone from twitter suggests I post on Product Hunt.
+    </p>
+    
+    <blockquote class="twitter-tweet" width="550">
+      <p lang="en" dir="ltr">
+        <a href="https://twitter.com/ericnakagawa">@ericnakagawa</a> You should post on <a href="https://twitter.com/ProductHunt">@ProductHunt</a> I bet <a href="https://twitter.com/rrhoover">@rrhoover</a> would love this
+      </p>
+      
+      <p>
+        &mdash; Andrew So (@AndrewDixonSo) <a href="https://twitter.com/AndrewDixonSo/status/618968054186119169">July 9, 2015</a>
+      </p>
+    </blockquote>
+    
+    <p>
+    </p>
+    
+    <p>
+      I make put together a funny cat + glasses linkmoji for ProductHunt and tag Ryan Hoover.
+    </p>
+    
+    <blockquote class="twitter-tweet" width="550">
+      <p lang="en" dir="ltr">
+        <a href="https://twitter.com/AndrewDixonSo">@AndrewDixonSo</a> <a href="https://twitter.com/ProductHunt">@ProductHunt</a> <a href="https://twitter.com/rrhoover">@rrhoover</a> I made this for Product Hunt <a href="http://t.co/zwfUBBiyCw">http://t.co/zwfUBBiyCw</a>😸👓 - an homage to Google Glass Kitten!
+      </p>
+      
+      <p>
+        &mdash; Eric Nakagawa (ナカガワ) (@ericnakagawa) <a href="https://twitter.com/ericnakagawa/status/618971714848993280">July 9, 2015</a>
+      </p>
+    </blockquote>
+    
+    <p>
+    </p>
+    
+    <p class="graf--p">
+      I wasn’t going to post to PH until I saw the CEO cheer me on.
+    </p>
+    
+    <blockquote class="twitter-tweet" width="550">
+      <p lang="en" dir="ltr">
+        <a href="https://twitter.com/ericnakagawa">@ericnakagawa</a> &lt;3! You should post it
+      </p>
+      
+      <p>
+        &mdash; Ryan Hoover (@rrhoover) <a href="https://twitter.com/rrhoover/status/618982228194758656">July 9, 2015</a>
+      </p>
+    </blockquote>
+    
+    <p>
+    </p>
+    
+    <p class="graf--p">
+      We spend the next few hours adding features and tightening up the design and head.
+    </p>
+    
+    <p class="graf--p">
+      I head to bed around midnight.
+    </p><figure class="graf--figure"> 
+    
+    <div class="aspectRatioPlaceholder is-locked">
+      <div class="aspect-ratio-fill">
+      </div>
+      
+      <div style="text-align: center;">
+        <img class="graf-image alignnone" src="https://d262ilb51hltx0.cloudfront.net/max/1600/1*Buw95D0MJ3EeQRljZ2rGww.png" alt="" width="462" height="76" />
+      </div>
+    </div></figure> 
+    
+    <h3 class="graf--h3">
+      OMG!
+    </h3>
+    
+    <p class="graf--p">
+      I wake up to this message…
+    </p><figure class="graf--figure"> 
+    
+    <div class="aspectRatioPlaceholder is-locked">
+      <div class="aspect-ratio-fill">
+      </div>
+      
+      <div style="text-align: center;">
+        <img class="graf-image alignnone" src="https://d262ilb51hltx0.cloudfront.net/max/1600/1*u_L6xdBMUwCk0ASM1WqZBQ.png" alt="" width="462" height="69" />
+      </div>
+    </div></figure> 
+    
+    <p class="graf--p">
+      I jump on to see how many people are on the website and…
+    </p><figure id="attachment_3645" style="width: 1722px" class="wp-caption alignnone">
+    
+    <img class="size-full wp-image-3645" src="http://blog.parseplatform.org//assets/wp-content/uploads/2015/07/wat.jpg" alt="whoa" width="1722" height="682" srcset="http://blog.parseplatform.org//assets/wp-content/uploads/2015/07/wat.jpg 1722w, http://blog.parseplatform.org//assets/wp-content/uploads/2015/07/wat-300x119.jpg 300w, http://blog.parseplatform.org//assets/wp-content/uploads/2015/07/wat-1024x406.jpg 1024w, http://blog.parseplatform.org//assets/wp-content/uploads/2015/07/wat-875x347.jpg 875w" sizes="(max-width: 1722px) 100vw, 1722px" /><figcaption class="wp-caption-text">whoa</figcaption></figure> <figure class="graf--figure graf--startsWithDoubleQuote"> 
+    
+    <div class="aspectRatioPlaceholder is-locked">
+    </div></figure> <figure class="graf--figure graf--startsWithDoubleQuote"> 
+    
+    <div class="aspectRatioPlaceholder is-locked">
+    </div>
+    
+    <h3 style="text-align: center;">
+      The rest of the day was crazy!
+    </h3></figure> 
+    
+    <p class="graf--p">
+      People begin linking to us from everywhere!
+    </p>
+    
+    <ul class="standard-list">
+      <li>
+        <a href="http://masatolan.com/Webservice/linkmoji/">A fan guide from Japan!</a>
+      </li>
+      <li>
+        <a href="http://mashable.com/2015/07/09/linkmoji-links-emoji/">Mashable</a>
+      </li>
+      <li>
+        <a href="https://www.reddit.com/r/InternetIsBeautiful/comments/3cnvx0/use_ws_to_shorten_your_links_to_emojis/">Reddit</a>
+      </li>
+      <li>
+        <a href="https://news.ycombinator.com/item?id=9858405">HackerNews</a>
+      </li>
+      <li>
+        <a href="http://www.publimetro.com.mx/tecno/asi-seria-la-url-de-sus-paginas-preferidas-de-internet-con-emojis/XeSogi!i5OWXKBeIl5lz_DnVwp8gA/">PubliMetro</a>
+      </li>
+      <li>
+        <a href="http://www.wired.com/2015/07/linkmoji-turns-urls-emoji/">Wired</a>
+      </li>
+      <li>
+        <a href="http://www.cosmopolitan.com/lifestyle/news/a43133/we-may-never-need-words-again-this-site-turns-any-link-into-emoji/">Cosmopolitan</a>
+      </li>
+      <li>
+        <a href="http://www.huffingtonpost.com/2015/07/10/type-links-in-emojis_n_7771190.html">Huffington Post</a>
+      </li>
+      <li>
+        <a href="http://mic.com/articles/122035/linkmoji-web-tool-emoji-links">MIC</a>
+      </li>
+      <li>
+        <a href="http://www.techradar.com/us/news/internet/turn-any-link-into-emoji-1298764">TechRadar</a>
+      </li>
+      <li>
+        <a href="http://www.salon.com/2015/07/10/can_you_write_a_best_seller_using_only_emoji/">Salon</a>
+      </li>
+    </ul>
+    
+    <p class="graf--p">
+      We end the day #1 on <a class="markup--anchor markup--p-anchor" href="http://www.producthunt.com/tech/linkmoji">Product Hunt</a>!
+    </p>
+    
+    <h3 class="graf--h4">
+      🎉Yay!🎉
+    </h3>
+    
+    <p>
+      &nbsp;
+    </p><figure style="width: 701px" class="wp-caption aligncenter">
+    
+    <a href="http://www.producthunt.com/tech/linkmoji"><img src="https://d262ilb51hltx0.cloudfront.net/max/1600/1*dhSWMNKdX1zjIQim5-tQvA.png" /></a><figcaption class="wp-caption-text">aw yeah</figcaption></figure> 
+    
+    <h3 class="graf--h3">
+      What’s next?
+    </h3>
+    
+    <p class="graf--p">
+      More fun features of course!
+    </p>
+    
+    <p class="graf--p">
+      The initial version launched with only 6-emoji characters. Since then we’ve:
+    </p>
+    
+    <ul class="standard-list">
+      <li>
+        Added support for textmoji (converting emoji into text). We found that some linkmoji wasn’t shareable on some social networks. Txtmoji solves this. When you create a linkmoji, you’re given the option to copy the generated link or a text version. <a href="http://pizza-poop.ws">http://pizza-poop.ws</a>
+      </li>
+      <li>
+        Added a SFW version of the link for people that don’t like sharing links with poop in them. <a href="http://🆒🔗.ws">http://🆒🔗.ws</a>
+      </li>
+      <li>
+        And by popular demand, I am adding a way to customize emoji!
+      </li>
+    </ul>
+    
+    <h4 class="graf--h4">
+      That’s all!
+    </h4>
+    
+    <p class="graf--p">
+      Follow <a class="markup--anchor markup--p-anchor" href="http://twitter.com/linkmoji">@linkmoji on Twitter</a>.
+    </p>
+    
+    <p class="graf--p">
+      I challenge you to keep building awesome stuff!
+    </p>
+    
+    <p class="graf--p">
+      The text all the way at the bottom that only a special few will read…
+    </p>
+    
+    <p class="graf--p">
+      Thanks to everyone who read this far, to those who love making linkmoji, shared ideas, previewed this draft, put up with my crazy ideas, and to those who upvoted on Reddit, HackerNews, ProductHunt, <a class="markup--anchor markup--p-anchor" href="https://www.facebook.com/pages/Linkmoji/884664038268209?fref=ts">Facebook</a>, Twitter, and everywhere else! ❤
+    </p>
+    
+    <p class="graf--p">
+      - <a class="markup--anchor markup--p-anchor" href="http://🍕💩.ws/🍕👑">Eric 🍕</a>, co-creator of <a class="markup--anchor markup--p-anchor" href="http://linkmoji.co">linkmoji</a> (and <a class="markup--anchor markup--p-anchor" href="http://🍕💩.ws/😸🍔😸🍔😸🍔">other</a> silly internet things)
+    </p>
+  </div>
+</div></section>
+</div>
+        <div class="copy-block margin-top-40 signature">
+            <div>
+                <span class="author">Eric Nakagawa</span>
+            </div>
+            <div class="margin-top-20">
+                
+                
+                
+            </div>
+        </div>
+    </article>
+</div>
+
+        </div><!-- /.content__wrapper -->
+    </div><!-- /.site__content -->
+</div><!-- /.site__wrapper -->
+</body>
+
+<script>
+    anchors.options = {
+      placement: 'left'
+    };
+    anchors.add();
+</script>
+</html>
